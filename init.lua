@@ -37,6 +37,7 @@ for _, name in ipairs({
     "nodes_pitchfork", -- This must come before hay
     "nodes_hay",
     "nodes_historic",
+    "nodes_mining",
     "nodes_roof",
     "nodes_straw",
     "nodes_threshing_floor",

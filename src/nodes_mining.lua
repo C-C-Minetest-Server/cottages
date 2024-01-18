@@ -18,6 +18,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
+local S = cottages.S
+
 ---------------------------------------------------------------------------------------
 -- a rope that is of use to the mines
 ---------------------------------------------------------------------------------------
@@ -58,8 +60,8 @@ minetest.register_node("cottages:ladder_with_rope_and_rail", {
     description = S("Ladder with rail support"),
     drawtype = "signlike",
     tiles = { "default_ladder_wood.png^carts_rail_straight.png^cottages_rope.png" },
-    inventory_image = "default_ladder_wood.png",
-    wield_image = "default_ladder_wood.png",
+    inventory_image = "default_ladder_wood.png^carts_rail_straight.png^cottages_rope.png",
+    wield_image = "default_ladder_wood.png^carts_rail_straight.png^cottages_rope.png",
     paramtype = "light",
     paramtype2 = "wallmounted",
     sunlight_propagates = true,
@@ -71,7 +73,7 @@ minetest.register_node("cottages:ladder_with_rope_and_rail", {
     },
     groups = { choppy = 2, oddly_breakable_by_hand = 3, rail = 1, connect_to_raillike = 1 },
     legacy_wallmounted = true,
-    sounds = cottages.sounds.wood,
+    sounds = default.node_sound_wood_defaults(),
 })
 
 
