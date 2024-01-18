@@ -1,6 +1,8 @@
 # Cottages: Decorations that fit to medieval settlements and small cottages
 
-This mod is a rewrite of [Sokomine's cottage mod](https://github.com/Sokomine/cottages), commit [`dbe69bc`](https://github.com/Sokomine/cottages/commit/dbe69bcfafa2efc256554b9fa3b9196b35928f1e). Some bugfixes and enhancements are adopted from [Smacker's fork](https://github.com/h-v-smacker/cottages).
+This mod is a rewrite of [Sokomine's cottage mod](https://github.com/Sokomine/cottages), commit [`dbe69bc`](https://github.com/Sokomine/cottages/commit/dbe69bcfafa2efc256554b9fa3b9196b35928f1e). Some bug fixes and enhancements are adopted from [Smacker's fork](https://github.com/h-v-smacker/cottages).
+
+This mod is a drop-in replacement in terms of player experience; most things will work as they were. However, some changes are made, and API compatibility is not guaranteed.
 
 
 ## List of notable changes
