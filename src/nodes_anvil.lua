@@ -180,7 +180,7 @@ minetest.register_node("cottages:anvil", {
             return cottages.player_can_use(meta, player) and -1 or 0
         elseif listname == "input" then
             if check_tool_input(stack) then
-                return -1
+                return stack:get_count()
             end
             local pname = player:get_player_name()
             if pname ~= "" then
@@ -197,7 +197,7 @@ minetest.register_node("cottages:anvil", {
                 return 0
             end
         end
-        return -1
+        return stack:get_count()
     end,
 
     on_punch = function(pos, node, puncher)
