@@ -100,8 +100,10 @@ end
 
 minetest.register_on_leaveplayer(function(player)
     local pname = player:get_player_name()
-    player_huds[pname].job:cancel()
-    player_huds[pname] = nil
+    if player_huds[pname] then
+        player_huds[pname].job:cancel()
+        player_huds[pname] = nil
+    end
 end)
 
 minetest.register_node("cottages:anvil", {
