@@ -177,7 +177,7 @@ minetest.register_node("cottages:anvil", {
         if listname == "hammer" then
             if stack:get_name() ~= "cottages:hammer" then return 0 end
             local meta = minetest.get_meta(pos)
-            return cottages.player_can_use(meta, player) and -1 or 0
+            return cottages.player_can_use(meta, player) and 1 or 0
         elseif listname == "input" then
             if check_tool_input(stack) then
                 return stack:get_count()
