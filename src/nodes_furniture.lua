@@ -439,7 +439,7 @@ minetest.register_craft({
     output = "cottages:washing 2",
     recipe = {
         { "group:stick" },
-        { "grounds:clay_lump" },
+        { "default:clay_lump" },
     }
 })
 
