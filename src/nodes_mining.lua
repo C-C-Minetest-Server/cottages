@@ -38,7 +38,7 @@ minetest.register_node("cottages:rope", {
     can_dig = function(pos, player)
         local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z });
         if below and below.name and below.name == "cottages:rope" then
-            if player and player:is_player()then
+            if player and player:is_player() then
                 minetest.chat_send_player(player:get_player_name(),
                     S('The entire rope would be too heavy. Start digging at its lowest end!'));
             end
@@ -51,7 +51,9 @@ minetest.register_node("cottages:rope", {
 minetest.register_craft({
     output = "cottages:rope",
     recipe = {
-        { "farming:cotton", "farming:cotton", "farming:cotton" }
+        { "farming:cotton" },
+        { "farming:cotton" },
+        { "farming:cotton" }
     }
 })
 
@@ -84,4 +86,3 @@ minetest.register_craft({
         { "default:ladder", "cottages:rope", "default:rail" }
     }
 })
-
