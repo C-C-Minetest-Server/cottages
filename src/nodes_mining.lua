@@ -23,8 +23,10 @@ local S = cottages.S
 ---------------------------------------------------------------------------------------
 -- a rope that is of use to the mines
 ---------------------------------------------------------------------------------------
--- the rope can only be digged if there is no further rope above it;
+-- the rope can only be digged if there is no further rope above it; (configuratble)
 -- Note: This rope also counts as a rail node; thus, carts can move through it
+
+local rope_dig_without_support = minetest.settings:get_bool("cottages.rope_dig_without_support", false)
 minetest.register_node("cottages:rope", {
     description = S("Rope for climbing"),
     tiles = { "cottages_rope.png" },
@@ -35,17 +37,24 @@ minetest.register_node("cottages:rope", {
     sunlight_propagates = true,
     drawtype = "plantlike",
     is_ground_content = false,
+    selection_box = {
+        type = "fixed",
+        fixed = { -0.2, -0.5, -0.2, 0.2, 0.5, 0.2 }
+    },
     can_dig = function(pos, player)
-        local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z });
-        if below and below.name and below.name == "cottages:rope" then
+        if rope_dig_without_support then return true end
+
+        local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
+        if below.name == "cottages:rope" then
             if player and player:is_player() then
                 minetest.chat_send_player(player:get_player_name(),
-                    S('The entire rope would be too heavy. Start digging at its lowest end!'));
+                    S('The entire rope would be too heavy. Start digging at its lowest end!'))
             end
-            return false;
+            return false
         end
-        return true;
-    end
+        return true
+    end,
+    sounds = default.node_sound_leaves_defaults(),
 })
 
 minetest.register_craft({

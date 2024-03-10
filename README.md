@@ -7,6 +7,8 @@ This mod is a drop-in replacement in terms of player experience; most things wil
 
 ## List of notable changes
 
+### Initial fork release
+
 * Players with `protection_bypass` or `server` can interact with any private nodes.
 * Window shutters no longer close or open with the sunlight.
 * Only one type of feldweg is left: the mesh type with 45 degree slope.
@@ -18,3 +20,7 @@ This mod is a drop-in replacement in terms of player experience; most things wil
 * The operating bucket in Tree Trunk Well is now handled with an inventory slot, not metadata field. The object is also generated every time the mapblock is loaded, not stored on disk.
 * Tree Trunk Well now supports Wooden bucket from Hume2.
 * Selection box of fences now matches their appearance; double fence is added (Thx Smacker)
+
+### Added later
+
+* Whether ropes can be dug without starting from the bottom is not configurable. (`cottages.rope_dig_without_support`)
