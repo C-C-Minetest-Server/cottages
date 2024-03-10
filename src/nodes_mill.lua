@@ -32,7 +32,7 @@ local cottages_handmill_formspec = "size[8,8]" ..
     "label[0,0.5;" .. F(S("Wheat seeds:")) .. "]" ..
     "label[4,0.5;" .. F(S("Flour:")) .. "]" ..
     "label[0,0;" .. F(S("Mill")) .. "]" ..
-    "label[0,2.5;" .. F(S("Punch this hand-driven mill@nto convert wheat seeds into flour.")) .. "]" ..
+    "label[0,2.5;" .. F(S("Punch this hand-driven mill\nto convert wheat seeds into flour.")) .. "]" ..
     "list[current_player;main;0,4;8,4;]" ..
     "listring[current_player;main]" ..
     "listring[context;seeds]" ..

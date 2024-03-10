@@ -33,7 +33,7 @@ local cottages_formspec_threshing_floor =
     "label[4,0.0;" .. F(S("Straw:")) .. "]" ..
     "label[4,2.0;" .. F(S("Seeds:")) .. "]" ..
     "label[0,0;" .. F(S("Threshing floor")) .. "]" ..
-    "label[0,2.5;" .. F(S("Punch threshing floor with a stick@nto get straw and seeds from wheat.")) .. "]" ..
+    "label[0,2.5;" .. F(S("Punch threshing floor with a stick\nto get straw and seeds from wheat.")) .. "]" ..
     "list[current_player;main;0,4;8,4;]" ..
     "listring[current_player;main]" ..
     "listring[context;harvest]" ..
