@@ -23,4 +23,4 @@ This mod is a drop-in replacement in terms of player experience; most things wil
 
 ### Added later
 
-* Whether ropes can be dug without starting from the bottom is not configurable. (`cottages.rope_dig_without_support`)
+* Whether ropes can be dug without starting from the bottom is now configurable. (`cottages.rope_dig_without_support`)
