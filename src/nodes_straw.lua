@@ -80,7 +80,7 @@ minetest.register_craft({
     output = "cottages:straw_mat 6",
     recipe = {
         { "default:stone", '',              '' },
-        { "farming:wheat", "farming:wheat", "farming:wheat"},
+        { "farming:wheat", "farming:wheat", "farming:wheat" },
     },
     replacements = { { "default:stone", "farming:seed_wheat 3" } },
 })

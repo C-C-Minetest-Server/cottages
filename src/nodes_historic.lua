@@ -250,5 +250,3 @@ minetest.register_craft({
         { "cottages:wool_tent", "cottages:wool_tent" }
     }
 })
-
-

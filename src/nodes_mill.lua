@@ -50,16 +50,16 @@ local mill_box = {
 minetest.register_node("cottages:handmill", {
     short_description = S("Mill"),
     description = S("Mill, powered by punching"),
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {cracky=2},
-	is_ground_content = false,
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = { cracky = 2 },
+    is_ground_content = false,
 
     drawtype = "mesh",
-	mesh = "cottages_handmill.obj",
-	tiles = {"default_stone.png"},
-	selection_box = mill_box,
-	collision_box = mill_box,
+    mesh = "cottages_handmill.obj",
+    tiles = { "default_stone.png" },
+    selection_box = mill_box,
+    collision_box = mill_box,
 
     _public_translate_key = "Public mill, powered by punching",
     _private_translate_key = "Private mill, powered by punching (owned by @1)",
@@ -82,9 +82,9 @@ minetest.register_node("cottages:handmill", {
         local meta = minetest.get_meta(pos)
         local pname = placer:get_player_name()
 
-		meta:set_string("owner", pname);
-		meta:set_string("infotext", S("Private mill, powered by punching (owned by @1)", pname));
-		meta:set_string("public", "")
+        meta:set_string("owner", pname);
+        meta:set_string("infotext", S("Private mill, powered by punching (owned by @1)", pname));
+        meta:set_string("public", "")
     end,
 
     on_receive_fields = cottages.on_public_receive_fields,
@@ -100,10 +100,10 @@ minetest.register_node("cottages:handmill", {
         end
 
         local inv = meta:get_inventory()
-        return cottages.check_inventory_empty(inv, {"flour", "seeds"})
+        return cottages.check_inventory_empty(inv, { "flour", "seeds" })
     end,
 
-    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, _, count, player)
         local meta = minetest.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
@@ -121,7 +121,7 @@ minetest.register_node("cottages:handmill", {
         return count
     end,
 
-    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_put = function(pos, listname, _, stack, player)
         local meta = minetest.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
@@ -137,7 +137,7 @@ minetest.register_node("cottages:handmill", {
         return stack:get_count()
     end,
 
-    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_take = function(pos, _, _, stack, player)
         local meta = minetest.get_meta(pos)
         return cottages.player_can_use(meta, player) and stack:get_count() or 0
     end,

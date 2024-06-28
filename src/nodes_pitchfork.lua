@@ -23,37 +23,37 @@ local S = cottages.S
 
 -- the straw node from default and similar nodes can be digged with the pitchfork as well
 local add_hay_group = { "farming:straw", "dryplants:reed", "darkage:straw_bale" }
-for i, v in ipairs(add_hay_group) do
-    if minetest.registered_items[v] then
-        new_groups = minetest.registered_items[v].groups
-        new_groups.hay = 3
-        minetest.override_item(v, { groups = new_groups })
-    end
+for _, name in ipairs(add_hay_group) do
+	if minetest.registered_items[name] then
+		local new_groups = table.copy(minetest.registered_items[name].groups)
+		new_groups.hay = 3
+		minetest.override_item(name, { groups = new_groups })
+	end
 end
 
 -- creates hay when digging dirt_with_grass (thanks to the override above);
 -- useful for digging hay and straw
 -- can be placed as a node
 minetest.register_tool("cottages:pitchfork", {
-    short_description = S("Pitchfork"),
+	short_description = S("Pitchfork"),
 	description = S("Pitchfork") .. "\n" .. S("Dig dirt with grass to get hay, place with right-click"),
 	inventory_image = "cottages_pitchfork.png",
 	wield_image = "cottages_pitchfork.png^[transformFYR180",
-	wield_scale = {x=1.5,y=1.5,z=0.5},
+	wield_scale = { x = 1.5, y = 1.5, z = 0.5 },
 	stack_max = 1,
 	liquids_pointable = false,
 	-- very useful for digging hay, straw and bales of those materials
 	tool_capabilities = {
 		full_punch_interval = 1.0,
-		max_drop_level=1,
-		groupcaps={
-			fleshy={times={[2]=0.80, [3]=0.40}, maxlevel=1, uses=1/0.002 },
-			snappy={times={[2]=0.80, [3]=0.40}, maxlevel=1, uses=1/0.002 },
-			hay   ={times={[2]=0.10, [3]=0.10}, maxlevel=1, uses=1/0.002 },
+		max_drop_level = 1,
+		groupcaps = {
+			fleshy = { times = { [2] = 0.80, [3] = 0.40 }, maxlevel = 1, uses = 1 / 0.002 },
+			snappy = { times = { [2] = 0.80, [3] = 0.40 }, maxlevel = 1, uses = 1 / 0.002 },
+			hay    = { times = { [2] = 0.10, [3] = 0.10 }, maxlevel = 1, uses = 1 / 0.002 },
 		},
-        damage_groups = {fleshy=5}, -- slightly stronger than a stone sword
+		damage_groups = { fleshy = 5 }, -- slightly stronger than a stone sword
 	},
-	sound = {breaks = "default_tool_breaks"},
+	sound = { breaks = "default_tool_breaks" },
 	-- place the pitchfork somewhere
 	on_place = function(itemstack, placer, pointed_thing)
 		if placer == nil or pointed_thing == nil or pointed_thing.type ~= "node" then
@@ -69,8 +69,8 @@ minetest.register_tool("cottages:pitchfork", {
 		end
 		minetest.rotate_and_place(ItemStack("cottages:pitchfork_placed"), placer, pointed_thing)
 		-- did the placing succeed? (Check code by Smacker)
-		local nnode = minetest.get_node(pos)
-		if not minetest.find_nodes_in_area({ x = pos.x, y = pos.y - 1, z = pos.z },
+		if not minetest.find_nodes_in_area(
+				{ x = pos.x, y = pos.y - 1, z = pos.z },
 				{ x = pos.x, y = pos.y + 1, z = pos.z },
 				{ "cottages:pitchfork_placed" })[1] then
 			return nil
@@ -86,23 +86,23 @@ minetest.register_tool("cottages:pitchfork", {
 
 -- a ptichfork placed somewhere
 minetest.register_node("cottages:pitchfork_placed", {
-	tiles = {"default_wood.png^[transformR90"},
+	tiles = { "default_wood.png^[transformR90" },
 	drawtype = "nodebox",
-	paramtype  = "light",
+	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = false,
-	groups = {snappy = 2, dig_immediate = 3, falling_node = 1, attached_node = 1, not_in_creative_inventory=1},
+	groups = { snappy = 2, dig_immediate = 3, falling_node = 1, attached_node = 1, not_in_creative_inventory = 1 },
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
 		fixed = {
 			-- handle (goes a bit into the ground)
-			{ -(1/32), -(11/16), -(1/32),  (1/32), 16/16, (1/32)},
+			{ -(1 / 32), -(11 / 16), -(1 / 32), (1 / 32),  16 / 16,   (1 / 32) },
 			-- middle connection
-			{ -(7/32),  -(4/16), -(1/32),  (7/32), -(2/16), (1/32)},
+			{ -(7 / 32), -(4 / 16),  -(1 / 32), (7 / 32),  -(2 / 16), (1 / 32) },
 			-- thongs
-			{ -(7/32), -(11/16), -(1/32), -(5/32), -(4/16), (1/32)},
-			{  (5/32), -(11/16), -(1/32),  (7/32), -(4/16), (1/32)},
+			{ -(7 / 32), -(11 / 16), -(1 / 32), -(5 / 32), -(4 / 16), (1 / 32) },
+			{ (5 / 32),  -(11 / 16), -(1 / 32), (7 / 32),  -(4 / 16), (1 / 32) },
 		},
 	},
 	selection_box = {
@@ -111,7 +111,7 @@ minetest.register_node("cottages:pitchfork_placed", {
 	},
 	drop = "cottages:pitchfork",
 	-- perserve wear
-	preserve_metadata = function(pos, oldnode, oldmeta, drops)
+	preserve_metadata = function(_, _, oldmeta, drops)
 		if oldmeta["wear"] then
 			-- the first drop is the pitchfork
 			drops[1]:set_wear(oldmeta["wear"])
@@ -123,11 +123,10 @@ minetest.register_node("cottages:pitchfork_placed", {
 -- craft recipes
 --
 minetest.register_craft({
-        output = 'cottages:pitchfork',
-        recipe = {
-                { 'default:stick','default:stick','default:stick' },
-                { '','default:stick', '' },
-                { '','default:stick','' },
-        }
+	output = 'cottages:pitchfork',
+	recipe = {
+		{ 'default:stick', 'default:stick', 'default:stick' },
+		{ '',              'default:stick', '' },
+		{ '',              'default:stick', '' },
+	}
 })
-

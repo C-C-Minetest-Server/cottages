@@ -152,9 +152,6 @@ minetest.register_node("cottages:sleeping_mat", {
     walkable = false,
     groups = { snappy = 3 },
     sounds = default.node_sound_leaves_defaults(),
-    selection_box = {
-        type = "wallmounted",
-    },
     node_box = {
         type = "fixed",
         fixed = {
@@ -184,7 +181,7 @@ minetest.register_node("cottages:sleeping_mat_head", {
     node_box = {
         type = "fixed",
         fixed = {
-            { -0.48, -0.5,      -0.48, 0.48, -0.5 + 1 / 16, 0.48 },
+            { -0.48, -0.5,          -0.48, 0.48, -0.5 + 1 / 16, 0.48 },
             { -0.34, -0.5 + 1 / 16, -0.12, 0.34, -0.5 + 2 / 16, 0.34 },
         }
     },
@@ -289,17 +286,17 @@ minetest.register_node("cottages:shelf", {
         inv:set_size("main", 24);
     end,
 
-    can_dig = function(pos, player)
-        local meta = minetest.get_meta(pos);
-        local inv = meta:get_inventory();
-        return inv:is_empty("main");
+    can_dig = function(pos)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        return inv:is_empty("main")
     end,
 
-    on_metadata_inventory_put = function(pos, listname, index, stack, player)
+    on_metadata_inventory_put = function(pos)
         local meta = minetest.get_meta(pos);
         meta:set_string('infotext', S('Open storage shelf') .. " " .. S("(in use)"));
     end,
-    on_metadata_inventory_take = function(pos, listname, index, stack, player)
+    on_metadata_inventory_take = function(pos)
         local meta = minetest.get_meta(pos);
         local inv = meta:get_inventory();
         if inv:is_empty("main") then
@@ -357,7 +354,7 @@ minetest.register_node("cottages:washing", {
 
         },
     },
-    on_rightclick = function(pos, node, player)
+    on_rightclick = function(pos, _, player)
         if not player:is_player() then return end
         local pname = player:get_player_name()
         -- works only with water beneath

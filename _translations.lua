@@ -1,6 +1,7 @@
 -- cottages/_translations.lua
 -- For update_translation to detect strings it normally wouldn't detect
 -- This file is NOT executed by the Minetest Engine.
+-- luacheck: ignore
 --[[
     Copyright (C) 2015-2022  Sokomine
 	Copyright (C) 2024  1F616EMO
@@ -19,8 +20,5 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
-function S() return end
-local _
-
-_ = S("Inventory is not empty!")
-_ = S("You are not the owner!")
+S("Inventory is not empty!")
+S("You are not the owner!")

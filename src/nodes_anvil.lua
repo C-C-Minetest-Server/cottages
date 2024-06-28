@@ -108,7 +108,7 @@ end)
 
 minetest.register_node("cottages:anvil", {
     description = S("Anvil"),
-    tiles = {"default_stone.png"},
+    tiles = { "default_stone.png" },
     drawtype = "nodebox",
     paramtype = "light",
     paramtype2 = "facedir",
@@ -127,7 +127,7 @@ minetest.register_node("cottages:anvil", {
         inv:set_size("input", 1)
         inv:set_size("hammer", 1)
     end,
-    after_place_node= function(pos, placer)
+    after_place_node = function(pos, placer)
         if not placer:is_player() then return end
 
         local meta  = minetest.get_meta(pos)
@@ -139,8 +139,8 @@ minetest.register_node("cottages:anvil", {
     can_dig = function(pos, player)
         if not player:is_player() then return end
 
-        local meta       = minetest.get_meta(pos)
-        local pname      = player:get_player_name()
+        local meta  = minetest.get_meta(pos)
+        local pname = player:get_player_name()
 
         if not cottages.player_can_use(meta, player) then
             minetest.chat_send_player(pname, S("Can't dig node: @1", S("You are not the owner!")))
@@ -156,7 +156,7 @@ minetest.register_node("cottages:anvil", {
         return true
     end,
 
-    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, _, count, player)
         local meta = minetest.get_meta(pos)
 
         if to_list == "input" then
@@ -175,7 +175,7 @@ minetest.register_node("cottages:anvil", {
 
         return cottages.player_can_use(meta, player) and count or 0
     end,
-    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_put = function(pos, listname, _, stack, player)
         if listname == "hammer" then
             if stack:get_name() ~= "cottages:hammer" then return 0 end
             local meta = minetest.get_meta(pos)
@@ -192,7 +192,7 @@ minetest.register_node("cottages:anvil", {
         end
         return 0
     end,
-    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_take = function(pos, listname, _, stack, player)
         if listname ~= "input" then
             local meta = minetest.get_meta(pos)
             if not cottages.player_can_use(meta, player) then
@@ -202,7 +202,7 @@ minetest.register_node("cottages:anvil", {
         return stack:get_count()
     end,
 
-    on_punch = function(pos, node, puncher)
+    on_punch = function(pos, _, puncher)
         if not puncher:is_player() then return end
         local wielded = puncher:get_wielded_item();
         if wielded:get_name() ~= "cottages:hammer" then
@@ -303,7 +303,7 @@ minetest.register_node("cottages:anvil", {
         player_huds[pname].job = minetest.after(2, clear_hud, pname)
 
         -- do the actual repair
-        input:add_wear(-5000)   -- equals to what technic toolshop does in 5 seconds
+        input:add_wear(-5000) -- equals to what technic toolshop does in 5 seconds
         inv:set_stack("input", 1, input)
 
         -- damage the hammer slightly

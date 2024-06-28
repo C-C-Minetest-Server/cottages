@@ -21,7 +21,7 @@
 local S = cottages.S
 
 minetest.override_item("default:dirt_with_grass", {
-    after_dig_node = function(pos, oldnode, oldmetadata, digger)
+    after_dig_node = function(pos, _, _, digger)
         if not digger or not digger:is_player() then
             return
         end
@@ -71,10 +71,10 @@ minetest.register_node("cottages:hay_mat", {
         }
     },
     -- make sure a placed hay block looks halfway reasonable
-    after_place_node = function(pos, placer, itemstack, pointed_thing)
+    after_place_node = function(pos)
         minetest.swap_node(pos, { name = "cottages:hay_mat", param2 = math.random(2, 25) })
     end,
-    on_timer = function(pos, elapsed)
+    on_timer = function(pos)
         local node = minetest.get_node(pos)
         if node and node.name == "cottages:hay_mat" then
             minetest.remove_node(pos)
@@ -114,28 +114,27 @@ minetest.register_node("cottages:hay_bale", {
 -- craft recipes
 --
 minetest.register_craft({
-	output = "cottages:hay_mat 9",
-	recipe = {
-		{"cottages:hay"},
-	},
+    output = "cottages:hay_mat 9",
+    recipe = {
+        { "cottages:hay" },
+    },
 })
 
 minetest.register_craft({
-	output = "cottages:hay",
-	recipe = {
-		{"cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat"},
-		{"cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat"},
-		{"cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat"},
-	},
+    output = "cottages:hay",
+    recipe = {
+        { "cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat" },
+        { "cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat" },
+        { "cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat" },
+    },
 })
 
 minetest.register_craft({
-	output = "cottages:hay",
-	recipe = {{"cottages:hay_bale"}},
+    output = "cottages:hay",
+    recipe = { { "cottages:hay_bale" } },
 })
 
 minetest.register_craft({
-	output = "cottages:hay_bale",
-	recipe = {{"cottages:hay"}},
+    output = "cottages:hay_bale",
+    recipe = { { "cottages:hay" } },
 })
-

@@ -31,18 +31,18 @@ local register_feldweg_node = function(node_name, def)
 	minetest.register_node(node_name, def)
 end
 function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_side, name_suffix,
-                                   texture_side_with_dent, texture_edges)
-    register_feldweg_node(":cottages:feldweg" .. suffix, {
-        description = S("Dirt road @1", name_suffix),
-        tiles = { texture_side_with_dent,
-            texture_side, texture_bottom, texture_top,
-            "cottages_feldweg_surface.png",
-            texture_edges },
-        drawtype = "mesh",
-        mesh = "feldweg.obj",
-    })
+								   texture_side_with_dent, texture_edges)
+	register_feldweg_node(":cottages:feldweg" .. suffix, {
+		description = S("Dirt road @1", name_suffix),
+		tiles = { texture_side_with_dent,
+			texture_side, texture_bottom, texture_top,
+			"cottages_feldweg_surface.png",
+			texture_edges },
+		drawtype = "mesh",
+		mesh = "feldweg.obj",
+	})
 
-    register_feldweg_node("cottages:feldweg_crossing" .. suffix, {
+	register_feldweg_node("cottages:feldweg_crossing" .. suffix, {
 		description = S("Dirt road crossing @1", name_suffix),
 		tiles = { texture_side_with_dent,
 			texture_bottom, texture_top,
@@ -52,7 +52,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg-crossing.obj",
 	})
 
-    register_feldweg_node("cottages:feldweg_t_junction" .. suffix, {
+	register_feldweg_node("cottages:feldweg_t_junction" .. suffix, {
 		description = S("Dirt road T-junction @1", name_suffix),
 		tiles = { texture_side_with_dent,
 			texture_side, texture_bottom, texture_top,
@@ -62,22 +62,22 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg-T-junction.obj",
 	})
 
-    register_feldweg_node("cottages:feldweg_curve" .. suffix, {
-		description = S("Dirt road curve @1",  name_suffix),
-        tiles = {
-            texture_side, texture_top,
-            texture_side,
-            "cottages_feldweg_surface.png",
-            texture_bottom,
-            texture_edges,
-            texture_side,
-            texture_bottom,
-            texture_top, },
+	register_feldweg_node("cottages:feldweg_curve" .. suffix, {
+		description = S("Dirt road curve @1", name_suffix),
+		tiles = {
+			texture_side, texture_top,
+			texture_side,
+			"cottages_feldweg_surface.png",
+			texture_bottom,
+			texture_edges,
+			texture_side,
+			texture_bottom,
+			texture_top, },
 		drawtype = "mesh",
 		mesh = "feldweg-curve.obj",
 	})
 
-    register_feldweg_node("cottages:feldweg_end" .. suffix, {
+	register_feldweg_node("cottages:feldweg_end" .. suffix, {
 		description = S("Dirt road end @1", name_suffix),
 		tiles = { texture_side_with_dent,
 			texture_side, texture_bottom, texture_top,
@@ -87,7 +87,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg_end.obj",
 	})
 
-    register_feldweg_node("cottages:feldweg_45" .. suffix, {
+	register_feldweg_node("cottages:feldweg_45" .. suffix, {
 		description = S("Dirt road 45º @1", name_suffix),
 		tiles = {
 			"cottages_feldweg_surface.png",
@@ -98,7 +98,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg_45.b3d",
 	})
 
-    register_feldweg_node("cottages:feldweg_s_45" .. suffix, {
+	register_feldweg_node("cottages:feldweg_s_45" .. suffix, {
 		description = S("Dirt road 45º edge @1", name_suffix),
 		tiles = {
 			texture_top, texture_side, texture_bottom,
@@ -109,7 +109,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg_s_45.b3d",
 	})
 
-    register_feldweg_node("cottages:feldweg_d_45" .. suffix, {
+	register_feldweg_node("cottages:feldweg_d_45" .. suffix, {
 		description = S("Dirt road 45º double edge @1", name_suffix),
 		tiles = {
 			texture_side, texture_bottom, texture_top,
@@ -120,7 +120,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg_d_45.b3d",
 	})
 
-    register_feldweg_node("cottages:feldweg_l_curve" .. suffix, {
+	register_feldweg_node("cottages:feldweg_l_curve" .. suffix, {
 		description = S("Dirt road left curve @1", name_suffix),
 		tiles = {
 			texture_side, texture_bottom, texture_top,
@@ -131,7 +131,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg_l_45_curve.b3d",
 	})
 
-    register_feldweg_node("cottages:feldweg_r_curve" .. suffix, {
+	register_feldweg_node("cottages:feldweg_r_curve" .. suffix, {
 		description = S("Dirt road right curve @1", name_suffix),
 		tiles = {
 			texture_side, texture_bottom, texture_top,
@@ -142,8 +142,8 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		mesh = "feldweg_r_45_curve.b3d",
 	})
 
-    -- Slopes
-    local box_slope = {
+	-- Slopes
+	local box_slope = {
 		type = "fixed",
 		fixed = {
 			{ -0.5, -0.5,  -0.5,  0.5, -0.25, 0.5 },
@@ -164,7 +164,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		}
 	}
 
-    register_feldweg_node("cottages:feldweg_slope" .. suffix, {
+	register_feldweg_node("cottages:feldweg_slope" .. suffix, {
 		description = S("Dirt road slope @1", name_suffix),
 		tiles = { texture_side_with_dent,
 			texture_side, texture_bottom, texture_top,
@@ -177,7 +177,7 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 		selection_box = box_slope,
 	})
 
-    register_feldweg_node("cottages:feldweg_slope_long" .. suffix, {
+	register_feldweg_node("cottages:feldweg_slope_long" .. suffix, {
 		description = S("Dirt road slope long @1", name_suffix),
 		tiles = { texture_side_with_dent,
 			texture_side, texture_bottom, texture_top,
@@ -191,9 +191,9 @@ function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_
 end
 
 function cottages.register_feldweg_recipe(suffix, base_craftitem)
-    local base_node = "cottages:feldweg" .. suffix
+	local base_node = "cottages:feldweg" .. suffix
 
-    minetest.register_craft({
+	minetest.register_craft({
 		output = base_node .. " 4",
 		recipe = {
 			{ "",             "cottages:wagon_wheel", "" },
@@ -202,7 +202,7 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		replacements = { { 'cottages:wagon_wheel', 'cottages:wagon_wheel' }, }
 	})
 
-    minetest.register_craft({
+	minetest.register_craft({
 		output = "cottages:feldweg_crossing" .. suffix .. " 5",
 		recipe = {
 			{ "",        base_node, "" },
@@ -230,40 +230,40 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		},
 	})
 
-    minetest.register_craft({
-        output = "cottages:feldweg_end" .. suffix .. " 5",
-        recipe = {
-            { base_node, "",        base_node },
-            { base_node, base_node, base_node }
-        },
-    })
+	minetest.register_craft({
+		output = "cottages:feldweg_end" .. suffix .. " 5",
+		recipe = {
+			{ base_node, "",        base_node },
+			{ base_node, base_node, base_node }
+		},
+	})
 
-    minetest.register_craft({
-        output = "cottages:feldweg_45" .. suffix,
-        recipe = { { base_node } }
-    })
-    minetest.register_craft({
-        output = "cottages:feldweg_l_curve" .. suffix,
-        recipe = { { "cottages:feldweg_45" .. suffix } }
-    })
-    minetest.register_craft({
-        output = "cottages:feldweg_r_curve" .. suffix,
-        recipe = { { "cottages:feldweg_l_curve" .. suffix } }
-    })
-    minetest.register_craft({
-        output = "cottages:feldweg_s_45" .. suffix,
-        recipe = { { "cottages:feldweg_r_curve" .. suffix } }
-    })
-    minetest.register_craft({
-        output = "cottages:feldweg_d_45" .. suffix,
-        recipe = { { "cottages:feldweg_s_45" .. suffix } }
-    })
-    minetest.register_craft({
-        output = "cottages:feldweg" .. suffix,
-        recipe = { { "cottages:feldweg_d_45" .. suffix } }
-    })
+	minetest.register_craft({
+		output = "cottages:feldweg_45" .. suffix,
+		recipe = { { base_node } }
+	})
+	minetest.register_craft({
+		output = "cottages:feldweg_l_curve" .. suffix,
+		recipe = { { "cottages:feldweg_45" .. suffix } }
+	})
+	minetest.register_craft({
+		output = "cottages:feldweg_r_curve" .. suffix,
+		recipe = { { "cottages:feldweg_l_curve" .. suffix } }
+	})
+	minetest.register_craft({
+		output = "cottages:feldweg_s_45" .. suffix,
+		recipe = { { "cottages:feldweg_r_curve" .. suffix } }
+	})
+	minetest.register_craft({
+		output = "cottages:feldweg_d_45" .. suffix,
+		recipe = { { "cottages:feldweg_s_45" .. suffix } }
+	})
+	minetest.register_craft({
+		output = "cottages:feldweg" .. suffix,
+		recipe = { { "cottages:feldweg_d_45" .. suffix } }
+	})
 
-    minetest.register_craft({
+	minetest.register_craft({
 		output = "cottages:feldweg_slope" .. suffix .. " 3",
 		recipe = {
 			{ base_node, "",        "" },
@@ -283,69 +283,69 @@ end
 -- Default variants
 local variants = {}
 variants["grass"] = {
-    "default_grass.png",
-    "default_dirt.png",
-    "default_dirt.png^default_grass_side.png",
-    "",
-    "default:dirt",
-    S("on grass"),
-    "cottages_feldweg_end.png",
-    "cottages_feldweg_surface.png^cottages_feldweg_edges.png",
+	"default_grass.png",
+	"default_dirt.png",
+	"default_dirt.png^default_grass_side.png",
+	"",
+	"default:dirt",
+	S("on grass"),
+	"cottages_feldweg_end.png",
+	"cottages_feldweg_surface.png^cottages_feldweg_edges.png",
 }
 variants["gravel"] = {
-    "default_gravel.png", -- grass top
-    "default_gravel.png", -- bottom
-    "default_gravel.png", -- side
-    "_gravel",
-    "default:gravel",
-    S("on gravel"),
-    "default_gravel.png",
-    "cottages_feldweg_surface.png^default_gravel.png",
+	"default_gravel.png", -- grass top
+	"default_gravel.png", -- bottom
+	"default_gravel.png", -- side
+	"_gravel",
+	"default:gravel",
+	S("on gravel"),
+	"default_gravel.png",
+	"cottages_feldweg_surface.png^default_gravel.png",
 }
 variants["coniferous"] = {
-    "default_coniferous_litter.png",                 -- grass top
-    "default_dirt.png",                              -- bottom
-    "default_dirt.png^default_coniferous_litter_side.png", -- side
-    "_coniferous",
-    "default:dirt_with_coniferous_litter",
-    S("on coniferious litter"),
-    "default_dirt.png^default_coniferous_litter_side.png", -- side with dent
-    "cottages_feldweg_surface.png^default_coniferous_litter.png",
+	"default_coniferous_litter.png",                       -- grass top
+	"default_dirt.png",                                    -- bottom
+	"default_dirt.png^default_coniferous_litter_side.png", -- side
+	"_coniferous",
+	"default:dirt_with_coniferous_litter",
+	S("on coniferious litter"),
+	"default_dirt.png^default_coniferous_litter_side.png", -- side with dent
+	"cottages_feldweg_surface.png^default_coniferous_litter.png",
 }
 variants["snow"] = {
-    "default_snow.png",                 -- grass top
-    "default_dirt.png",                 -- bottom
-    "default_dirt.png^default_snow_side.png", -- side
-    "_snow",
-    "default:dirt_with_snow",
-    S("on snow"),
-    "default_dirt.png^default_snow_side.png", -- side
-    "cottages_feldweg_surface.png^default_snow.png",
+	"default_snow.png",                       -- grass top
+	"default_dirt.png",                       -- bottom
+	"default_dirt.png^default_snow_side.png", -- side
+	"_snow",
+	"default:dirt_with_snow",
+	S("on snow"),
+	"default_dirt.png^default_snow_side.png", -- side
+	"cottages_feldweg_surface.png^default_snow.png",
 }
 variants["dry"] = {
-    "default_dry_grass.png",                 -- grass top
-    "default_dirt.png",                      -- bottom
-    "default_dirt.png^default_dry_grass_side.png", -- side
-    "_dry",
-    "default:dry_dirt",
-    S("on dry dirt"),
-    "default_dirt.png^default_dry_grass_side.png", -- side
-    "cottages_feldweg_surface.png^default_dry_grass.png",
+	"default_dry_grass.png",                       -- grass top
+	"default_dirt.png",                            -- bottom
+	"default_dirt.png^default_dry_grass_side.png", -- side
+	"_dry",
+	"default:dry_dirt",
+	S("on dry dirt"),
+	"default_dirt.png^default_dry_grass_side.png", -- side
+	"cottages_feldweg_surface.png^default_dry_grass.png",
 }
 if minetest.get_modpath("ethereal") then
-    variants["bamboo"] = {
-        "ethereal_grass_bamboo_top.png",          -- grass top
-        "default_dirt.png",                       -- bottom
-        "default_dirt.png^ethereal_grass_bamboo_side.png", -- side
-        "_bamboo",
-        "ethereal:bamboo_dirt",
-        S("on bamboo dirt"),
-        "default_dirt.png^ethereal_grass_bamboo_side.png", -- side
-        "cottages_feldweg_surface.png^ethereal_grass_bamboo_top.png",
-    }
+	variants["bamboo"] = {
+		"ethereal_grass_bamboo_top.png",                   -- grass top
+		"default_dirt.png",                                -- bottom
+		"default_dirt.png^ethereal_grass_bamboo_side.png", -- side
+		"_bamboo",
+		"ethereal:bamboo_dirt",
+		S("on bamboo dirt"),
+		"default_dirt.png^ethereal_grass_bamboo_side.png", -- side
+		"cottages_feldweg_surface.png^ethereal_grass_bamboo_top.png",
+	}
 end
 
-for k, v in pairs(variants) do
-    cottages.register_feldweg(v[4], v[1], v[2], v[3], v[6], v[7], v[8])
-    cottages.register_feldweg_recipe(v[4], v[5])
+for _, v in pairs(variants) do
+	cottages.register_feldweg(v[4], v[1], v[2], v[3], v[6], v[7], v[8])
+	cottages.register_feldweg_recipe(v[4], v[5])
 end

@@ -104,7 +104,6 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         minetest.register_alias("cottages:roof_flat_straw", "stairs:slab_straw")
     end
 
-    local output = "cottages_roof_" .. name
     if not homedecor_alternative or minetest.get_modpath("homedecor") then
         minetest.register_craft({
             output = "cottages:roof_" .. name .. " 6",
@@ -194,7 +193,11 @@ cottages.register_roof('slate', S("Slate"),
 ---------------------------------------------------------------------------------------
 minetest.register_node("cottages:slate_vertical", {
     description = S("Vertical Slate"),
-    tiles = { "cottages_slate.png", cottages.texture_roof_sides, "cottages_slate.png", "cottages_slate.png", cottages.texture_roof_sides, "cottages_slate.png" },
+    tiles = {
+        "cottages_slate.png", cottages.texture_roof_sides,
+        "cottages_slate.png", "cottages_slate.png",
+        cottages.texture_roof_sides, "cottages_slate.png"
+    },
     paramtype2 = "facedir",
     groups = { cracky = 2, stone = 1 },
     sounds = default.node_sound_stone_defaults(),

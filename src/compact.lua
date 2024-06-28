@@ -39,7 +39,7 @@ minetest.register_lbm({
     name = "cottages:compact_npc_chest",
     nodenames = { "group:legacy_cottages_chests" },
     run_at_every_load = false,
-    action = function(pos, node, dtime_s)
+    action = function(pos, node)
         node.name = "default:chest"
         minetest.set_node(pos, node)
     end,

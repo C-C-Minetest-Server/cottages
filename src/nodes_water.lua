@@ -91,7 +91,7 @@ minetest.register_entity("cottages:bucket_entity_new", {
 })
 
 local function spawn_well_entity(pos, item_name)
-    local up_pos = vector.add(pos, { x = 0, y = 4/16, z = 0 })
+    local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
     local obj = minetest.add_entity(up_pos, "cottages:bucket_entity_new")
     if obj then
         obj:get_luaentity():set_item(pos, item_name)
@@ -100,7 +100,7 @@ local function spawn_well_entity(pos, item_name)
 end
 
 local function alter_well_entity(pos, item_name)
-    local up_pos = vector.add(pos, { x = 0, y = 4/16, z = 0 })
+    local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
     local objs = minetest.get_objects_inside_radius(up_pos, 0.5)
 
     local del = false
@@ -121,7 +121,7 @@ local function alter_well_entity(pos, item_name)
 end
 
 local function remove_well_entity(pos)
-    local up_pos = vector.add(pos, { x = 0, y = 4/16, z = 0 })
+    local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
     local objs = minetest.get_objects_inside_radius(up_pos, 0.5)
 
     for _, obj in ipairs(objs) do
@@ -136,7 +136,7 @@ local function remove_well_entity(pos)
 end
 
 local function check_well_entity(pos, item_name)
-    local up_pos = vector.add(pos, { x = 0, y = 4/16, z = 0 })
+    local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
     local objs = minetest.get_objects_inside_radius(up_pos, 0.5)
 
     local del = false
@@ -161,15 +161,15 @@ local function check_well_entity(pos, item_name)
 end
 
 local well_formspec = "size[8,9]" ..
-    "label[3.0,0.0;Tree trunk well]"..
-    "label[1.5,0.7;" .. F(S("Punch the well while wielding an empty bucket.")) .. "]"..
-    "label[1.5,1.0;" .. F(S("Your bucket will slowly be filled with river water.")) .. "]"..
-    "label[1.5,1.3;" .. F(S("Punch again to get the bucket back when it is full.")) .. "]"..
-    "label[1.0,2.9;" .. F(S("Internal bucket storage (passive storage only):")) .. "]"..
-    "item_image[0.2,0.7;1.0,1.0;bucket:bucket_empty]"..
-    "item_image[0.2,1.7;1.0,1.0;bucket:bucket_river_water]"..
-    "label[1.5,1.9;" .. F(S("Punch well with full water bucket in order to empty bucket.")) .. "]"..
-    "button[6.0,0.0;2,0.5;public;"..F(S("Public?")).."]"..
+    "label[3.0,0.0;Tree trunk well]" ..
+    "label[1.5,0.7;" .. F(S("Punch the well while wielding an empty bucket.")) .. "]" ..
+    "label[1.5,1.0;" .. F(S("Your bucket will slowly be filled with river water.")) .. "]" ..
+    "label[1.5,1.3;" .. F(S("Punch again to get the bucket back when it is full.")) .. "]" ..
+    "label[1.0,2.9;" .. F(S("Internal bucket storage (passive storage only):")) .. "]" ..
+    "item_image[0.2,0.7;1.0,1.0;bucket:bucket_empty]" ..
+    "item_image[0.2,1.7;1.0,1.0;bucket:bucket_river_water]" ..
+    "label[1.5,1.9;" .. F(S("Punch well with full water bucket in order to empty bucket.")) .. "]" ..
+    "button[6.0,0.0;2,0.5;public;" .. F(S("Public?")) .. "]" ..
     "list[context;main;1,3.3;8,1;]" ..
     "list[current_player;main;0,4.85;8,1;]" ..
     "list[current_player;main;0,6.08;8,3;8]" ..
@@ -177,53 +177,53 @@ local well_formspec = "size[8,9]" ..
     "listring[current_player;main]"
 
 minetest.register_node("cottages:water_gen", {
-	description = S("Tree Trunk Well"),
-	tiles = {"default_tree_top.png", "default_tree.png^[transformR90", "default_tree.png^[transformR90"},
-	drawtype = "nodebox",
-	paramtype  = "light",
-	paramtype2 = "facedir",
-	is_ground_content = false,
-	groups = {tree = 1, choppy = 2, cracky = 1, flammable = 2},
+    description = S("Tree Trunk Well"),
+    tiles = { "default_tree_top.png", "default_tree.png^[transformR90", "default_tree.png^[transformR90" },
+    drawtype = "nodebox",
+    paramtype = "light",
+    paramtype2 = "facedir",
+    is_ground_content = false,
+    groups = { tree = 1, choppy = 2, cracky = 1, flammable = 2 },
     sounds = default.node_sound_wood_defaults(),
     node_box = {
-		type = "fixed",
-		fixed = {
-			-- floor of water bassin
-			{-0.5, -0.5+(3/16), -0.5,  0.5,   -0.5+(4/16),  0.5},
-			-- walls
-			{-0.5, -0.5+(3/16), -0.5,  0.5,        (4/16), -0.5+(2/16)},
-			{-0.5, -0.5+(3/16), -0.5, -0.5+(2/16), (4/16),  0.5},
-			{ 0.5, -0.5+(3/16),  0.5,  0.5-(2/16), (4/16), -0.5},
-			{ 0.5, -0.5+(3/16),  0.5, -0.5+(2/16), (4/16),  0.5-(2/16)},
-			-- feet
-			{-0.5+(3/16), -0.5, -0.5+(3/16), -0.5+(6/16), -0.5+(3/16),  0.5-(3/16)},
-			{ 0.5-(3/16), -0.5, -0.5+(3/16),  0.5-(6/16), -0.5+(3/16),  0.5-(3/16)},
-			-- real pump
-			{ 0.5-(4/16), -0.5,        -(2/16),  0.5, 0.5+(4/16),  (2/16)},
-			-- water pipe inside wooden stem
-			{ 0.5-(8/16), 0.5+(1/16),  -(1/16),  0.5, 0.5+(3/16),  (1/16)},
-			-- where the water comes out
-			{ 0.5-(15/32), 0.5,        -(1/32),  0.5-(12/32), 0.5+(1/16),  (1/32)},
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, -0.5, 0.5, 0.5+(4/16), 0.5 }
-	},
+        type = "fixed",
+        fixed = {
+            -- floor of water bassin
+            { -0.5,            -0.5 + (3 / 16), -0.5,            0.5,             -0.5 + (4 / 16), 0.5 },
+            -- walls
+            { -0.5,            -0.5 + (3 / 16), -0.5,            0.5,             (4 / 16),        -0.5 + (2 / 16) },
+            { -0.5,            -0.5 + (3 / 16), -0.5,            -0.5 + (2 / 16), (4 / 16),        0.5 },
+            { 0.5,             -0.5 + (3 / 16), 0.5,             0.5 - (2 / 16),  (4 / 16),        -0.5 },
+            { 0.5,             -0.5 + (3 / 16), 0.5,             -0.5 + (2 / 16), (4 / 16),        0.5 - (2 / 16) },
+            -- feet
+            { -0.5 + (3 / 16), -0.5,            -0.5 + (3 / 16), -0.5 + (6 / 16), -0.5 + (3 / 16), 0.5 - (3 / 16) },
+            { 0.5 - (3 / 16),  -0.5,            -0.5 + (3 / 16), 0.5 - (6 / 16),  -0.5 + (3 / 16), 0.5 - (3 / 16) },
+            -- real pump
+            { 0.5 - (4 / 16),  -0.5,            -(2 / 16),       0.5,             0.5 + (4 / 16),  (2 / 16) },
+            -- water pipe inside wooden stem
+            { 0.5 - (8 / 16),  0.5 + (1 / 16),  -(1 / 16),       0.5,             0.5 + (3 / 16),  (1 / 16) },
+            -- where the water comes out
+            { 0.5 - (15 / 32), 0.5,             -(1 / 32),       0.5 - (12 / 32), 0.5 + (1 / 16),  (1 / 32) },
+        },
+    },
+    selection_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5, 0.5, 0.5 + (4 / 16), 0.5 }
+    },
 
     _public_translate_key = "Public tree trunk well",
     _private_translate_key = "Private tree trunk well (owned by @1)",
 
     on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
+        local meta = minetest.get_meta(pos)
         local inv = meta:get_inventory()
 
-		inv:set_size('main', 6)
+        inv:set_size('main', 6)
         inv:set_size("bucket", 1)
         meta:set_string("formspec", well_formspec)
-		meta:set_string("infotext", S("Public tree trunk well"))
+        meta:set_string("infotext", S("Public tree trunk well"))
         meta:set_string("public", "public")
-	end,
+    end,
 
     after_place_node = function(pos, placer)
         if not placer:is_player() then return end
@@ -231,9 +231,9 @@ minetest.register_node("cottages:water_gen", {
         local meta = minetest.get_meta(pos)
         local pname = placer:get_player_name()
 
-		meta:set_string("owner", pname);
-		meta:set_string("infotext", S("Private tree trunk well (owned by @1)", pname));
-		meta:set_string("public", "")
+        meta:set_string("owner", pname);
+        meta:set_string("infotext", S("Private tree trunk well (owned by @1)", pname));
+        meta:set_string("public", "")
     end,
 
     can_dig = function(pos, player)
@@ -247,18 +247,18 @@ minetest.register_node("cottages:water_gen", {
         end
 
         local inv = meta:get_inventory()
-        return cottages.check_inventory_empty(inv, {"main", "bucket"})
+        return cottages.check_inventory_empty(inv, { "main", "bucket" })
     end,
 
-    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+    allow_metadata_inventory_move = function(pos, from_list, _, to_list, _, count, player)
         if to_list == "bucket" or from_list == "bucket" then
             -- That inventory slot is handled only by mod
             return 0
         end
-        return cottages.player_can_use(meta, player) and count or 0
+        return cottages.player_can_use(minetest.get_meta(pos), player) and count or 0
     end,
 
-    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_put = function(pos, listname, _, stack, player)
         if listname == "main" then
             local meta = minetest.get_meta(pos)
             if not cottages.player_can_use(meta, player) then
@@ -273,7 +273,7 @@ minetest.register_node("cottages:water_gen", {
         return 0
     end,
 
-    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_take = function(pos, listname, _, stack, player)
         if listname == "main" then
             local meta = minetest.get_meta(pos)
             if not cottages.player_can_use(meta, player) then
@@ -287,13 +287,13 @@ minetest.register_node("cottages:water_gen", {
 
     on_blast = function(pos)
         minetest.get_node_timer(pos):stop()
-        cottages.drop_inventory(pos, {"main", "bucket"})
+        cottages.drop_inventory(pos, { "main", "bucket" })
         minetest.remove_node(pos)
     end,
 
     on_receive_fields = cottages.on_public_receive_fields,
 
-    on_punch = function(pos, node, puncher, pointed_thing)
+    on_punch = function(pos, _, puncher)
         if not (puncher and puncher:is_player()) then return end
 
         local pname = puncher:get_player_name()
@@ -301,7 +301,7 @@ minetest.register_node("cottages:water_gen", {
         if not cottages.player_can_use(meta, puncher) then
             local owner = meta:get_string("owner")
             minetest.chat_send_player(pname,
-				S("This tree trunk well is owned by @1. You can't use it.", owner))
+                S("This tree trunk well is owned by @1. You can't use it.", owner))
         end
 
         local pinv = puncher:get_inventory()
@@ -309,7 +309,8 @@ minetest.register_node("cottages:water_gen", {
 
         local bucket = inv:get_stack("bucket", 1)
         if not bucket:is_empty() then
-            if cottages.well_accepted_buckets[bucket:get_name()] == "" or cottages.well_accepted_buckets[bucket:get_name()] == nil then
+            if cottages.well_accepted_buckets[bucket:get_name()] == ""
+                or cottages.well_accepted_buckets[bucket:get_name()] == nil then
                 -- That is, liquid filled
                 -- Or it is invalid (avoid them sticking inside forever)
                 if not pinv:room_for_item("main", bucket) then
@@ -322,7 +323,7 @@ minetest.register_node("cottages:water_gen", {
                 inv:set_stack("bucket", 1, "")
             else
                 minetest.chat_send_player(pname,
-				    S("Please wait until your bucket has been filled."))
+                    S("Please wait until your bucket has been filled."))
             end
             return
         end
@@ -364,7 +365,7 @@ minetest.register_lbm({
     name = "cottages:water_compact_legacy",
     nodenames = { 'cottages:water_gen' },
     run_at_every_load = false,
-    action = function(pos, node)
+    action = function(pos)
         local meta = minetest.get_meta(pos)
         local bucket = meta:get_string("bucket")
         if bucket ~= "" then
@@ -387,7 +388,7 @@ minetest.register_lbm({
     name = "cottages:water_spawn_entityy",
     nodenames = { 'cottages:water_gen' },
     run_at_every_load = true,
-    action = function(pos, node)
+    action = function(pos)
         local meta = minetest.get_meta(pos)
         local inv = meta:get_inventory()
         local bucket = inv:get_stack("bucket", 1)

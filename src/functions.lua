@@ -31,8 +31,8 @@ function cottages.player_can_use(meta, player)
         return true
     end
 
-	local owner = meta:get_string('owner')
-	local public = meta:get_string('public')
+    local owner = meta:get_string('owner')
+    local public = meta:get_string('public')
 
     if public == "public" or owner == "" or owner == pname then
         return true
@@ -71,7 +71,7 @@ function cottages.toggle_public(pos, player)
 
         -- Turn it into private
         meta:set_string("public", "")
-        
+
         if def._private_translate_key then
             meta:set_string("infotext", S(def._private_translate_key, owner))
         end
@@ -108,7 +108,7 @@ function cottages.get_public_infotext(pos)
     return ""
 end
 
-function cottages.on_public_receive_fields(pos, formname, fields, sender)
+function cottages.on_public_receive_fields(pos, _, fields, sender)
     if fields.public then
         local meta = minetest.get_meta(pos)
         local pname = sender:get_player_name()

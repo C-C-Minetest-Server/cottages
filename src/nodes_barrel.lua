@@ -22,7 +22,7 @@ local S = cottages.S
 
 local function on_construct(pos)
     local meta = minetest.get_meta(pos);
-    local percent = math.random(1, 100);  -- TODO: show real filling
+    local percent = math.random(1, 100); -- TODO: show real filling
 
     meta:set_string('formspec',
         "size[8,9]" ..
@@ -35,25 +35,25 @@ local function on_construct(pos)
         "list[current_player;main;0,5;8,4;]");
 
 
-    meta:set_string('liquid_type', '');  -- which liquid is in the barrel?
-    meta:set_int('liquid_level', 0);     -- how much of the liquid is in there?
+    meta:set_string('liquid_type', ''); -- which liquid is in the barrel?
+    meta:set_int('liquid_level', 0);    -- how much of the liquid is in there?
 
     local inv = meta:get_inventory()
-    inv:set_size("input", 1);    -- to fill in new liquid
-    inv:set_size("output", 1);   -- to extract liquid
+    inv:set_size("input", 1);  -- to fill in new liquid
+    inv:set_size("output", 1); -- to extract liquid
 end
 
-local function can_dig(pos, player)
+local function can_dig(pos)
     local meta = minetest.get_meta(pos)
     local inv  = meta:get_inventory()
 
-    return cottages.check_inventory_empty(inv, {"input", "output"})
+    return cottages.check_inventory_empty(inv, { "input", "output" })
 end
 
 -- Liquid handling not yet done even on upstream.
 -- but at least, lets add protection checking.
 
-local function allow_metadata_inventory_put(pos, listname, index, stack, player)
+local function allow_metadata_inventory_put(pos, _, _, _, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
@@ -65,7 +65,7 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
     return -1
 end
 
-local function allow_metadata_inventory_move(pos, from_list, from_index, to_list, to_index, count, player)
+local function allow_metadata_inventory_move(pos, _, _, _, _, count, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
@@ -77,7 +77,7 @@ local function allow_metadata_inventory_move(pos, from_list, from_index, to_list
     return count
 end
 
-local function allow_metadata_inventory_take(pos, listname, index, stack, player)
+local function allow_metadata_inventory_take(pos, _, _, _, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
@@ -90,7 +90,7 @@ local function allow_metadata_inventory_take(pos, listname, index, stack, player
 end
 
 local function on_punch_swap(name)
-    return function(pos, node, puncher)
+    return function(pos, node)
         node.name = name
         node.param2 = 0
         minetest.swap_node(pos, node)
@@ -98,7 +98,7 @@ local function on_punch_swap(name)
 end
 
 local function within3_param2_swap(name)
-    return function(pos, node, puncher)
+    return function(pos, node)
         if node.param2 < 3 then
             node.param2 = node.param2 + 1
         else
@@ -233,7 +233,3 @@ minetest.register_craft({
         { "cottages:tub" },
     },
 })
-
-
-
-

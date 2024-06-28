@@ -93,14 +93,14 @@ minetest.register_node("cottages:threshing_floor", {
     end,
 
     after_place_node = function(pos, placer)
-		if not placer:is_player() then return end
+        if not placer:is_player() then return end
 
         local meta = minetest.get_meta(pos)
         local pname = placer:get_player_name()
 
-		meta:set_string("owner", pname);
-		meta:set_string("infotext", S("Private threshing floor (owned by @1)", pname));
-		meta:set_string("public", "")
+        meta:set_string("owner", pname);
+        meta:set_string("infotext", S("Private threshing floor (owned by @1)", pname));
+        meta:set_string("public", "")
     end,
 
     on_receive_fields = cottages.on_public_receive_fields,
@@ -116,10 +116,10 @@ minetest.register_node("cottages:threshing_floor", {
         end
 
         local inv = meta:get_inventory()
-        return cottages.check_inventory_empty(inv, {"harvest", "straw", "seeds"})
+        return cottages.check_inventory_empty(inv, { "harvest", "straw", "seeds" })
     end,
 
-    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+    allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, _, count, player)
         local meta = minetest.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
@@ -137,7 +137,7 @@ minetest.register_node("cottages:threshing_floor", {
         return count
     end,
 
-    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_put = function(pos, listname, _, stack, player)
         local meta = minetest.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
@@ -153,12 +153,12 @@ minetest.register_node("cottages:threshing_floor", {
         return stack:get_count()
     end,
 
-    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+    allow_metadata_inventory_take = function(pos, _, _, stack, player)
         local meta = minetest.get_meta(pos)
         return cottages.player_can_use(meta, player) and stack:get_count() or 0
     end,
 
-    on_punch = function(pos, node, puncher)
+    on_punch = function(pos, _, puncher)
         if not puncher:is_player() then return end
 
         do -- `wielded` garbage collect
@@ -174,12 +174,12 @@ minetest.register_node("cottages:threshing_floor", {
 
         local inv = meta:get_inventory()
 
-        local anz_wheat = 10 + math.random( 0, 30 )
+        local anz_wheat = 10 + math.random(0, 30)
         local rem_wheat = inv:remove_item("harvest", "farming:wheat " .. anz_wheat)
         local wheat_count = rem_wheat:get_count()
 
         local add_straw = ItemStack("cottages:straw_mat " .. wheat_count)
-		local add_seeds = ItemStack("farming:seed_wheat " .. wheat_count)
+        local add_seeds = ItemStack("farming:seed_wheat " .. wheat_count)
 
         if inv:room_for_item("straw", add_straw) and inv:room_for_item("seeds", add_seeds) then
             inv:add_item("straw", add_straw)
