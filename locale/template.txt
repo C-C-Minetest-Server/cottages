@@ -140,12 +140,12 @@ pitchfork (for hay and straw)=
 Straw=
 Reet=
 Wooden=
-Black=
-Red=
-Brown=
+Asphalt=
+Terracotta=
+Brown shingle=
 Slate=
 Vertical Slate=
-Reet for thatching=
+Reed for thatching=
 
 ##[ src/nodes_straw.lua ]##
 ### nodes_straw.lua ###
