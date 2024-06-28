@@ -41,9 +41,7 @@ minetest.register_node("cottages:rope", {
         type = "fixed",
         fixed = { -0.2, -0.5, -0.2, 0.2, 0.5, 0.2 }
     },
-    can_dig = function(pos, player)
-        if rope_dig_without_support then return true end
-
+    can_dig = rope_dig_without_support and function(pos, player)
         local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
         if below.name == "cottages:rope" then
             if player and player:is_player() then
@@ -53,7 +51,7 @@ minetest.register_node("cottages:rope", {
             return false
         end
         return true
-    end,
+    end or nil,
     sounds = default.node_sound_leaves_defaults(),
 })
 
