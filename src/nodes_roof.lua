@@ -168,17 +168,17 @@ cottages.register_roof('wood', S("Wooden"),
         "default_wood.png", "default_wood.png",
         "default_wood.png", "default_tree.png" },
     "group:wood", nil)
-cottages.register_roof('black', S("Black"),
+cottages.register_roof('black', S("Asphalt"),
     { "cottages_homedecor_shingles_asphalt.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "cottages_homedecor_shingles_asphalt.png" },
     'homedecor:shingles_asphalt', "default:coal_lump")
-cottages.register_roof('red', S("Red"),
+cottages.register_roof('red', S("Terracotta"),
     { "cottages_homedecor_shingles_terracotta.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "cottages_homedecor_shingles_terracotta.png" },
     'homedecor:shingles_terracotta', "default:clay_brick")
-cottages.register_roof('brown', S("Brown"),
+cottages.register_roof('brown', S("Brown shingle"),
     { "cottages_homedecor_shingles_wood.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "cottages_homedecor_shingles_wood.png" },
@@ -213,7 +213,7 @@ minetest.register_craft({
 -- Reed might also be needed as a full block
 ---------------------------------------------------------------------------------------
 minetest.register_node("cottages:reet", {
-    description = S("Reet for thatching"),
+    description = S("Reed for thatching"),
     tiles = { "cottages_reet.png" },
     groups = { hay = 3, snappy = 3, choppy = 3, oddly_breakable_by_hand = 3, flammable = 3 },
     sounds = default.node_sound_leaves_defaults(),
