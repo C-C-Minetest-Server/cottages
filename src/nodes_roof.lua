@@ -20,7 +20,7 @@
 
 local S = cottages.S
 
-cottages.register_roof = function(name, display_name, tiles, basic_material, homedecor_alternative)
+cottages.register_roof = function(name, display_name, tiles, basic_material, homedecor_alternative, sounds)
     minetest.register_node("cottages:roof_" .. name, {
         description = S("@1 Roof", display_name),
         drawtype = "nodebox",
@@ -43,6 +43,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
             },
         },
         is_ground_content = false,
+        sound = sounds,
     })
 
     -- a better roof than the normal stairs; this one is for usage directly on top of walls (it has the form of a stair)
@@ -156,37 +157,37 @@ cottages.register_roof('straw', S("Straw"),
     { "cottages_darkage_straw.png", "cottages_darkage_straw.png",
         "cottages_darkage_straw.png", "cottages_darkage_straw.png",
         "cottages_darkage_straw.png", "cottages_darkage_straw.png" },
-    'cottages:straw_mat', nil)
+    'cottages:straw_mat', nil, default.node_sound_leaves_defaults())
 cottages.register_roof('reet', S("Reet"),
     { "cottages_reet.png", "cottages_reet.png",
         "cottages_reet.png", "cottages_reet.png",
         "cottages_reet.png", "cottages_reet.png" },
-    "default:papyrus", nil)
+    "default:papyrus", nil, default.node_sound_leaves_defaults())
 cottages.register_roof('wood', S("Wooden"),
     { "default_tree.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "default_tree.png" },
-    "group:wood", nil)
+    "group:wood", nil, default.node_sound_wood_defaults())
 cottages.register_roof('black', S("Asphalt"),
     { "cottages_homedecor_shingles_asphalt.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "cottages_homedecor_shingles_asphalt.png" },
-    'homedecor:shingles_asphalt', "default:coal_lump")
+    'homedecor:shingles_asphalt', "default:coal_lump", default.node_sound_wood_defaults())
 cottages.register_roof('red', S("Terracotta"),
     { "cottages_homedecor_shingles_terracotta.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "cottages_homedecor_shingles_terracotta.png" },
-    'homedecor:shingles_terracotta', "default:clay_brick")
+    'homedecor:shingles_terracotta', "default:clay_brick", default.node_sound_wood_defaults())
 cottages.register_roof('brown', S("Brown shingle"),
     { "cottages_homedecor_shingles_wood.png", "default_wood.png",
         "default_wood.png", "default_wood.png",
         "default_wood.png", "cottages_homedecor_shingles_wood.png" },
-    'homedecor:shingles_wood', "default:dirt")
+    'homedecor:shingles_wood', "default:dirt", default.node_sound_wood_defaults())
 cottages.register_roof('slate', S("Slate"),
     { "cottages_slate.png", "default_wood.png",
         "cottages_slate.png", "cottages_slate.png",
         "default_wood.png", "cottages_slate.png" },
-    "default:stone", nil)
+    "default:stone", nil, default.node_sound_stone_defaults())
 
 ---------------------------------------------------------------------------------------
 -- slate roofs are sometimes on vertical fronts of houses

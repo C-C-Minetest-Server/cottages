@@ -54,6 +54,7 @@ minetest.register_node("cottages:threshing_floor", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { cracky = 2, choppy = 2 },
+    sounds = default.node_sound_wood_defaults(),
     is_ground_content = false,
 
     drawtype = "nodebox",

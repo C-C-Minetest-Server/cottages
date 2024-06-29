@@ -42,6 +42,7 @@ minetest.register_node("cottages:fence_small", {
     node_box = small_box,
     selection_box = small_box,
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
 })
 
 
@@ -74,6 +75,7 @@ minetest.register_node("cottages:fence_corner", {
     node_box = corner_box,
     selection_box = corner_box,
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
 })
 
 
@@ -113,6 +115,7 @@ minetest.register_node("cottages:fence_end", {
     node_box = end_box,
     selection_box = end_box,
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
 })
 
 local double_box = {
@@ -143,6 +146,7 @@ minetest.register_node("cottages:fence_double", {
     node_box = double_box,
     selection_box = double_box,
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_craft({

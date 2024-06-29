@@ -113,6 +113,7 @@ minetest.register_node("cottages:anvil", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { cracky = 2 },
+	sounds = default.node_sound_metal_defaults(),
 
     node_box = anvil_node_box,
     selection_box = anvil_node_box,

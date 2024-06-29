@@ -37,6 +37,7 @@ minetest.register_node("cottages:wagon_wheel", {
     groups = { choppy = 2, dig_immediate = 2, attached_node = 1 },
     legacy_wallmounted = true,
     is_ground_content = false,
+    sounds = default.node_sound_metal_defaults();
 })
 
 minetest.register_node("cottages:loam", {
@@ -87,6 +88,7 @@ minetest.register_node("cottages:glass_pane", {
     paramtype2 = "facedir",
     use_texture_alpha = "clip",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_glass_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -111,6 +113,7 @@ minetest.register_node("cottages:glass_pane_side", {
     paramtype2 = "facedir",
     use_texture_alpha = "clip",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_glass_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -135,6 +138,7 @@ minetest.register_node("cottages:wood_flat", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -159,6 +163,7 @@ minetest.register_node("cottages:wool_tent", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    sounds = default.node_sound_defaults(),
     node_box = {
         type = "fixed",
         fixed = {

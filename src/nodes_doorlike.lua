@@ -51,6 +51,7 @@ minetest.register_node("cottages:window_shutter_open", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_wood_defaults(),
     -- larger than one node but slightly smaller than a half node so that wallmounted torches pose no problem
     node_box = {
         type = "fixed",
@@ -80,6 +81,7 @@ minetest.register_node("cottages:window_shutter_closed", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1 },
+	sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -109,6 +111,7 @@ minetest.register_node("cottages:half_door", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -155,6 +158,7 @@ minetest.register_node("cottages:half_door_inverted", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -201,6 +205,7 @@ minetest.register_node("cottages:gate_closed", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -232,6 +237,7 @@ minetest.register_node("cottages:gate_open", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1 },
+	sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -259,7 +265,7 @@ minetest.register_node("cottages:gate_open", {
 })
 
 local new_facedirs = { 10, 19, 4, 13, 2, 18, 22, 14, 20, 16, 0, 12, 11, 3, 7, 21, 9, 23, 5, 1, 8, 15, 6, 17 }
-cottages.register_hatch = function(nodename, description, texture, receipe_item)
+cottages.register_hatch = function(nodename, description, texture, receipe_item, sounds)
     minetest.register_node(nodename, {
         description = description, -- not that there are any other...
         drawtype = "nodebox",
@@ -268,6 +274,7 @@ cottages.register_hatch = function(nodename, description, texture, receipe_item)
         paramtype = "light",
         paramtype2 = "facedir",
         groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+        sounds = sounds,
 
         node_box = {
             type = "fixed",
@@ -312,8 +319,14 @@ cottages.register_hatch = function(nodename, description, texture, receipe_item)
     })
 end
 
-cottages.register_hatch('cottages:hatch_wood', S("Wooden Hatch"), 'cottages_minimal_wood.png', "stairs:slab_wood");
-cottages.register_hatch('cottages:hatch_steel', S("Metal Hatch"), 'cottages_steel_block.png', "default:steel_ingot");
+cottages.register_hatch(
+    'cottages:hatch_wood', S("Wooden Hatch"),
+    'cottages_minimal_wood.png', "stairs:slab_wood",
+    default.node_sound_wood_defaults())
+cottages.register_hatch(
+    'cottages:hatch_steel', S("Metal Hatch"),
+    'cottages_steel_block.png', "default:steel_ingot",
+    default.node_sound_metal_defaults())
 
 
 minetest.register_craft({

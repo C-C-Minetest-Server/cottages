@@ -53,6 +53,7 @@ minetest.register_node("cottages:handmill", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { cracky = 2 },
+	sounds = default.node_sound_stone_defaults(),
     is_ground_content = false,
 
     drawtype = "mesh",

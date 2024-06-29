@@ -236,6 +236,7 @@ minetest.register_node("cottages:table", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -269,6 +270,7 @@ minetest.register_node("cottages:shelf", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    sounds = default.node_sound_wood_defaults(),
     node_box = shelf_box,
     selection_box = shelf_box,
 
@@ -313,6 +315,7 @@ minetest.register_node("cottages:stovepipe", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
         fixed = {
@@ -341,6 +344,7 @@ minetest.register_node("cottages:washing", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+	sounds = default.node_sound_dirt_defaults(),
     node_box = {
         type = "fixed",
         fixed = {

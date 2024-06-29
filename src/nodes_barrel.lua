@@ -117,6 +117,7 @@ minetest.register_node("cottages:barrel", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
 
     on_punch = on_punch_swap("cottages:barrel_open"),
 
@@ -136,6 +137,7 @@ minetest.register_node("cottages:barrel_open", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1 },
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
     drop = "cottages:barrel",
 
     on_punch = on_punch_swap("cottages:barrel_lying"),
@@ -157,6 +159,7 @@ minetest.register_node("cottages:barrel_lying", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1 },
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
     drop = "cottages:barrel",
 
     on_punch = within3_param2_swap("cottages:barrel_lying_open"),
@@ -178,6 +181,7 @@ minetest.register_node("cottages:barrel_lying_open", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1 },
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
     drop = "cottages:barrel",
 
     on_punch = within3_param2_swap("cottages:barrel"),
@@ -208,6 +212,7 @@ minetest.register_node("cottages:tub", {
     collision_box = tub_node_box,
     groups = { tree = 1, snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
     is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_craft({
