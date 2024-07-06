@@ -337,10 +337,10 @@ minetest.register_node("cottages:water_gen", {
         end
 
         if cottages.well_accepted_buckets[stack_name] and cottages.well_accepted_buckets[stack_name] ~= "" then
-            inv:set_stack("bucket", 1, stack)
-            puncher:set_wielded_item("")
+            inv:set_stack("bucket", 1, stack:take_item())
+            puncher:set_wielded_item(stack)
 
-            spawn_well_entity(pos, stack:get_name())
+            spawn_well_entity(pos, stack_name)
 
             local timer = minetest.get_node_timer(pos)
             timer:start(cottages.water_fill_time)
