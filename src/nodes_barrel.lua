@@ -210,7 +210,7 @@ minetest.register_node("cottages:tub", {
     tiles = { "cottages_barrel.png" },
     selection_box = tub_node_box,
     collision_box = tub_node_box,
-    groups = { tree = 1, snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
+    groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
     is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
 })

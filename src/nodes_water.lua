@@ -183,7 +183,7 @@ minetest.register_node("cottages:water_gen", {
     paramtype = "light",
     paramtype2 = "facedir",
     is_ground_content = false,
-    groups = { tree = 1, choppy = 2, cracky = 1, flammable = 2 },
+    groups = { choppy = 2, cracky = 1, flammable = 2 },
     sounds = default.node_sound_wood_defaults(),
     node_box = {
         type = "fixed",
