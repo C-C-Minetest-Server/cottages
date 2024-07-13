@@ -43,8 +43,7 @@ local cottages_formspec_threshing_floor =
     "listring[context;seeds]" ..
     "listring[current_player;main]"
 
-
-minetest.register_node("cottages:threshing_floor", {
+local def = {
     description = S("Threshing Floor"),
     tiles = {
         "cottages_junglewood.png^farming_wheat.png",
@@ -193,7 +192,10 @@ minetest.register_node("cottages:threshing_floor", {
         infotext = infotext .. "\n" .. S("Processed @1 wheats", wheat_count)
         meta:set_string("infotext", infotext)
     end,
-})
+}
+default.set_inventory_action_loggers(def, "threshing floor")
+
+minetest.register_node("cottages:threshing_floor", def)
 
 minetest.register_craft({
     output = "cottages:threshing_floor",

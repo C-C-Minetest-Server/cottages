@@ -47,13 +47,13 @@ local mill_box = {
     }
 }
 
-minetest.register_node("cottages:handmill", {
+local def = {
     short_description = S("Mill"),
     description = S("Mill, powered by punching"),
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { cracky = 2 },
-	sounds = default.node_sound_stone_defaults(),
+    sounds = default.node_sound_stone_defaults(),
     is_ground_content = false,
 
     drawtype = "mesh",
@@ -177,7 +177,11 @@ minetest.register_node("cottages:handmill", {
         infotext = infotext .. "\n" .. S("Processed @1 seeds", anz)
         meta:set_string("infotext", infotext)
     end,
-})
+}
+
+default.set_inventory_action_loggers(def, "hand mill")
+
+minetest.register_node("cottages:handmill", def)
 
 minetest.register_craft({
     output = "cottages:handmill",

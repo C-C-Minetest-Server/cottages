@@ -106,14 +106,14 @@ minetest.register_on_leaveplayer(function(player)
     end
 end)
 
-minetest.register_node("cottages:anvil", {
+local def = {
     description = S("Anvil"),
     tiles = { "default_stone.png" },
     drawtype = "nodebox",
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { cracky = 2 },
-	sounds = default.node_sound_metal_defaults(),
+    sounds = default.node_sound_metal_defaults(),
 
     node_box = anvil_node_box,
     selection_box = anvil_node_box,
@@ -311,7 +311,11 @@ minetest.register_node("cottages:anvil", {
         wielded:add_wear(100)
         puncher:set_wielded_item(wielded)
     end,
-})
+}
+
+default.set_inventory_action_loggers(def, "anvil")
+
+minetest.register_node("cottages:anvil", def)
 
 minetest.register_craft({
     output = "cottages:anvil",

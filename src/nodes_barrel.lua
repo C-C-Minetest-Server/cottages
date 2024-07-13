@@ -109,7 +109,12 @@ local function within3_param2_swap(name)
     end
 end
 
-minetest.register_node("cottages:barrel", {
+local function apply_logger(def)
+    default.set_inventory_action_loggers(def, "barrel")
+    return def
+end
+
+minetest.register_node("cottages:barrel", apply_logger({
     description = S("Barrel (Closed)"),
     paramtype = "light",
     drawtype = "mesh",
@@ -117,7 +122,7 @@ minetest.register_node("cottages:barrel", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 
     on_punch = on_punch_swap("cottages:barrel_open"),
 
@@ -127,9 +132,9 @@ minetest.register_node("cottages:barrel", {
     allow_metadata_inventory_put = allow_metadata_inventory_put,
     allow_metadata_inventory_move = allow_metadata_inventory_move,
     allow_metadata_inventory_take = allow_metadata_inventory_take,
-})
+}))
 
-minetest.register_node("cottages:barrel_open", {
+minetest.register_node("cottages:barrel_open", apply_logger({
     description = S("Barrel (Opened)"),
     paramtype = "light",
     drawtype = "mesh",
@@ -137,7 +142,7 @@ minetest.register_node("cottages:barrel_open", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1 },
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
     drop = "cottages:barrel",
 
     on_punch = on_punch_swap("cottages:barrel_lying"),
@@ -148,9 +153,9 @@ minetest.register_node("cottages:barrel_open", {
     allow_metadata_inventory_put = allow_metadata_inventory_put,
     allow_metadata_inventory_move = allow_metadata_inventory_move,
     allow_metadata_inventory_take = allow_metadata_inventory_take,
-})
+}))
 
-minetest.register_node("cottages:barrel_lying", {
+minetest.register_node("cottages:barrel_lying", apply_logger({
     description = S("Barrel (Closed), lying"),
     paramtype = "light",
     paramtype2 = "facedir",
@@ -159,7 +164,7 @@ minetest.register_node("cottages:barrel_lying", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1 },
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
     drop = "cottages:barrel",
 
     on_punch = within3_param2_swap("cottages:barrel_lying_open"),
@@ -170,9 +175,9 @@ minetest.register_node("cottages:barrel_lying", {
     allow_metadata_inventory_put = allow_metadata_inventory_put,
     allow_metadata_inventory_move = allow_metadata_inventory_move,
     allow_metadata_inventory_take = allow_metadata_inventory_take,
-})
+}))
 
-minetest.register_node("cottages:barrel_lying_open", {
+minetest.register_node("cottages:barrel_lying_open", apply_logger({
     description = S("Barrel (Opened), lying"),
     paramtype = "light",
     paramtype2 = "facedir",
@@ -181,7 +186,7 @@ minetest.register_node("cottages:barrel_lying_open", {
     tiles = { "cottages_barrel.png" },
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1 },
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
     drop = "cottages:barrel",
 
     on_punch = within3_param2_swap("cottages:barrel"),
@@ -192,7 +197,7 @@ minetest.register_node("cottages:barrel_lying_open", {
     allow_metadata_inventory_put = allow_metadata_inventory_put,
     allow_metadata_inventory_move = allow_metadata_inventory_move,
     allow_metadata_inventory_take = allow_metadata_inventory_take,
-})
+}))
 
 -- Tub
 local tub_node_box = {
@@ -212,7 +217,7 @@ minetest.register_node("cottages:tub", {
     collision_box = tub_node_box,
     groups = { snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_craft({

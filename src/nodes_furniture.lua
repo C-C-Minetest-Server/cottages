@@ -263,7 +263,7 @@ local shelf_box = {
         { -0.5, 0.3,  -0.3, 0.5,  0.4,  0.5 },
     },
 }
-minetest.register_node("cottages:shelf", {
+local shelf_def = {
     description = S("Open storage shelf"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -306,7 +306,9 @@ minetest.register_node("cottages:shelf", {
         end
     end,
     is_ground_content = false,
-})
+}
+default.set_inventory_action_loggers(shelf_def, "open storage shelf")
+minetest.register_node("cottages:shelf", shelf_def)
 
 minetest.register_node("cottages:stovepipe", {
     description = S("stovepipe"),
@@ -344,7 +346,7 @@ minetest.register_node("cottages:washing", {
     paramtype = "light",
     paramtype2 = "facedir",
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
-	sounds = default.node_sound_dirt_defaults(),
+    sounds = default.node_sound_dirt_defaults(),
     node_box = {
         type = "fixed",
         fixed = {

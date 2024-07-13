@@ -176,7 +176,7 @@ local well_formspec = "size[8,9]" ..
     "listring[context;main]" ..
     "listring[current_player;main]"
 
-minetest.register_node("cottages:water_gen", {
+local def = {
     description = S("Tree Trunk Well"),
     tiles = { "default_tree_top.png", "default_tree.png^[transformR90", "default_tree.png^[transformR90" },
     drawtype = "nodebox",
@@ -321,6 +321,11 @@ minetest.register_node("cottages:water_gen", {
                 remove_well_entity(pos)
                 pinv:add_item("main", bucket)
                 inv:set_stack("bucket", 1, "")
+
+                minetest.log("action", string.format(
+                    "%s takes %s from tree trunk well at %s",
+                    pname, bucket:to_string(), minetest.pos_to_string(pos)
+                ))
             else
                 minetest.chat_send_player(pname,
                     S("Please wait until your bucket has been filled."))
@@ -337,8 +342,14 @@ minetest.register_node("cottages:water_gen", {
         end
 
         if cottages.well_accepted_buckets[stack_name] and cottages.well_accepted_buckets[stack_name] ~= "" then
-            inv:set_stack("bucket", 1, stack:take_item())
+            local hand_bucket = stack:take_item()
+            inv:set_stack("bucket", 1, hand_bucket)
             puncher:set_wielded_item(stack)
+
+            minetest.log("action", string.format(
+                "%s moves %s to tree trunk well at %s",
+                pname, hand_bucket:to_string(), minetest.pos_to_string(pos)
+            ))
 
             spawn_well_entity(pos, stack_name)
 
@@ -358,7 +369,9 @@ minetest.register_node("cottages:water_gen", {
             alter_well_entity(pos, filled_name)
         end
     end,
-})
+}
+default.set_inventory_action_loggers(def, "tree trunk well")
+minetest.register_node("cottages:water_gen", def)
 
 minetest.register_lbm({
     label = "Move legacy bucket into inventory",
