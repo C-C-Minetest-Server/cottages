@@ -45,10 +45,13 @@ local cottages_anvil_formspec =
     "list[context;hammer;5,3;1,1;]" ..
     "label[2.5,1.0;" .. F(S("Workpiece:")) .. "]" ..
     "label[6,2.7;" .. F(S("Optional\nhammer\nstorage")) .. "]" ..
-
     "label[0,0;" .. F(S("Anvil")) .. "]" ..
     "label[0,3.0;" .. F(S("Punch anvil with hammer to\nrepair tool in workpiece-slot.")) .. "]" ..
-    "list[current_player;main;0,4;8,4;]";
+    "list[current_player;main;0,4;8,4;]" ..
+    "listring[current_player;main]" ..
+    "listring[context;input]" ..
+    "listring[current_player;main]" ..
+    "listring[context;hammer]"
 
 -- Model from realtest
 local anvil_node_box = {
