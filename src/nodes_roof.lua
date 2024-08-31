@@ -209,7 +209,7 @@ minetest.register_node("cottages:slate_vertical", {
 minetest.register_craft({
     output = "cottages:slate_vertical",
     recipe = {
-        { "default:stone", "default_wood.png" }
+        { "default:stone", "group:wood" }
     }
 })
 
