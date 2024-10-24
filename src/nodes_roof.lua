@@ -286,14 +286,64 @@ cottages.register_roof('slate', S("Slate"),
     "default:stone", nil, default.node_sound_stone_defaults())
 
 ---------------------------------------------------------------------------------------
--- slate roofs are sometimes on vertical fronts of houses
+-- Vertical roofs
 ---------------------------------------------------------------------------------------
-minetest.register_node("cottages:slate_vertical", {
-    description = S("Vertical Slate"),
+
+function cottages.register_vertical_roof(name, description, texture, craftitem)
+    minetest.register_node("cottages:" .. name, {
+        description = description,
+        tiles = {
+            texture, cottages.texture_roof_sides,
+            texture, texture,
+            cottages.texture_roof_sides, texture
+        },
+        paramtype2 = "facedir",
+        groups = { cracky = 2, stone = 1 },
+        sounds = default.node_sound_stone_defaults(),
+        is_ground_content = false,
+    })
+
+    if craftitem ~= false then
+        minetest.register_craft({
+            output = "cottages:" .. name,
+            recipe = {
+                { "default:stone", "group:wood", craftitem }
+            }
+        })
+    end
+
+    cottages.derive_blocks("cottages", name, {
+        description = description,
+        tiles = { texture },
+        groups = { cracky = 2, stone = 1 },
+        sounds = default.node_sound_stone_defaults(),
+    })
+end
+
+cottages.register_vertical_roof("slate_vertical", S("Vertical Slate"),
+    "cottages_slate.png", nil)
+cottages.register_vertical_roof("roof_vertical_asphalt", S("Vertical asphalt roof"),
+    "cottages_homedecor_shingles_asphalt.png", "default:coal_lump")
+cottages.register_vertical_roof("roof_vertical_terracotta", S("Vertical terracotta roof"),
+    "cottages_homedecor_shingles_terracotta.png", "default:clay_brick")
+cottages.register_vertical_roof("roof_vertical_wood", S("Vertical wooden roof"),
+    "default_tree.png", "default:clay_brick")
+cottages.register_vertical_roof("roof_vertical_brown", S("Vertical brown shingle roof"),
+    "cottages_homedecor_shingles_wood.png", "default:dirt")
+cottages.register_vertical_roof("roof_vertical_shingle", S("Vertical shingle roof"),
+    "cottages_homedecor_shingles_misc_wood.png", false)
+
+minetest.register_craft({
+    output = "cottages:roof_vertical_shingle 2",
+    recipe = { { "group:wood", "cottages:wood_flat" } }
+})
+
+minetest.register_node("cottages:roof_vertical_wood", {
+    description = S("Vertical wooden roof"),
     tiles = {
-        "cottages_slate.png", cottages.texture_roof_sides,
-        "cottages_slate.png", "cottages_slate.png",
-        cottages.texture_roof_sides, "cottages_slate.png"
+        "default_tree.png", cottages.texture_roof_sides,
+        "default_tree.png", "default_tree.png",
+        cottages.texture_roof_sides, "default_tree.png"
     },
     paramtype2 = "facedir",
     groups = { cracky = 2, stone = 1 },
@@ -303,9 +353,9 @@ minetest.register_node("cottages:slate_vertical", {
 
 
 minetest.register_craft({
-    output = "cottages:slate_vertical",
+    output = "cottages:roof_vertical_wood",
     recipe = {
-        { "default:stone", "group:wood" }
+        { "default:stone", "group:wood", "group:tree" }
     }
 })
 

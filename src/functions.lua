@@ -130,3 +130,34 @@ function cottages.drop_inventory(pos, lists)
         end
     end
 end
+
+function cottages.derive_blocks(modname, nodename, def)
+    local name = modname .. ":" .. nodename
+    if not def then
+        def = assert(minetest.registered_nodes[name])
+    end
+
+    if minetest.global_exists("stairsplus") then
+        stairsplus:register_all(modname, nodename, name, {
+            description = def.description,
+            tiles = def.tiles,
+            groups = def.groups,
+            sounds = def.sounds,
+            is_ground_content = false,
+        })
+    elseif minetest.global_exists("stairs") then
+        if stairs.mod == "redo" then
+            stairs.register_all(nodename, name,
+            def.groups,
+            def.tiles,
+            def.description,
+            def.sounds)
+        else
+            stairs.register_stair_and_slab(nodename, name,
+            def.groups,
+            def.tiles,
+            def.description,
+            def.sounds)
+        end
+    end
+end
