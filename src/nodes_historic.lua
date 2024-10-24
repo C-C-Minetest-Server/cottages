@@ -48,21 +48,9 @@ minetest.register_node("cottages:loam", {
     is_ground_content = false,
 })
 
-stairs.register_stair_and_slab("loam", "cottages:loam",
-    { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
-    { "cottages_loam.png" },
-    S("Loam Stairs"),
-    S("Loam Slab"),
-    default.node_sound_dirt_defaults()
-)
+cottages.derive_blocks("cottages", "loam")
 
-stairs.register_stair_and_slab("clay", "default:clay",
-    { crumbly = 3 },
-    { "cottages_clay.png" },
-    S("Clay Stairs"),
-    S("Clay Slab"),
-    default.node_sound_dirt_defaults()
-)
+cottages.derive_blocks("default", "clay")
 
 minetest.register_node("cottages:straw_ground", {
     description = S("straw ground for animals"),
