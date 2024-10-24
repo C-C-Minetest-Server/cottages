@@ -143,7 +143,6 @@ function cottages.derive_blocks(modname, nodename, def)
             tiles = def.tiles,
             groups = def.groups,
             sounds = def.sounds,
-            is_ground_content = false,
         })
     elseif minetest.global_exists("stairs") then
         if stairs.mod == "redo" then
