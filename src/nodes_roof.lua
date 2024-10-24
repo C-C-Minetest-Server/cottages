@@ -105,6 +105,68 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         minetest.register_alias("cottages:roof_flat_straw", "stairs:slab_straw")
     end
 
+    minetest.register_node("cottages:roof_" .. name .. "_corner_inner", {
+        description = S("@1 Roof (inner corner) ", display_name),
+        drawtype = "nodebox",
+        tiles = { tiles[1],
+            tiles[2],
+            tiles[3],
+            tiles[2] .. "^(" .. tiles[6] .. "^cottages_corner_inner_mask.png^[transformFX^[makealpha:255,255,255)",
+            tiles[5],
+            tiles[2] .. "^(" .. tiles[6] .. "^cottages_corner_inner_mask.png^[makealpha:255,255,255)" },
+        paramtype = "light",
+        paramtype2 = "facedir",
+        groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, roof = 1 },
+        node_box = {
+            type = "fixed",
+            fixed = {
+                { -0.5, -0.5, -0.5, 0.0, 0,   0 },
+                { -0.5, 0,    0,    0.5, 0.5, 0.5 },
+                { 0,    0,    0,    0.5, 0.5, -0.5 },
+            },
+        },
+        selection_box = {
+            type = "fixed",
+            fixed = {
+                { -0.5, -0.5, -0.5, 0.0, 0,   0 },
+                { -0.5, 0,    0,    0.5, 0.5, 0.5 },
+                { 0,    0,    0,    0.5, 0.5, -0.5 },
+            },
+        },
+        is_ground_content = false,
+    })
+
+    minetest.register_node("cottages:roof_" .. name .. "_corner_outer", {
+        description = S("@1 Roof (outer corner) ", display_name),
+        drawtype = "nodebox",
+        tiles = { tiles[1],
+            tiles[2],
+            tiles[1],
+            tiles[2],
+            tiles[2],
+            tiles[1] },
+        paramtype = "light",
+        paramtype2 = "facedir",
+        groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, roof = 1 },
+        node_box = {
+            type = "fixed",
+            fixed = {
+                { -0.5, -0.5, -0.5, 0.5, 0,   0 },
+                { -0.5, 0,    0,    0,   0.5, 0.5 },
+                { 0,    -0.5, 0,    0.5, 0,   0.5 },
+            },
+        },
+        selection_box = {
+            type = "fixed",
+            fixed = {
+                { -0.5, -0.5, -0.5, 0.5, 0,   0 },
+                { -0.5, 0,    0,    0,   0.5, 0.5 },
+                { 0,    -0.5, 0,    0.5, 0,   0.5 },
+            },
+        },
+        is_ground_content = false,
+    })
+
     if not homedecor_alternative or minetest.get_modpath("homedecor") then
         minetest.register_craft({
             output = "cottages:roof_" .. name .. " 6",
@@ -139,6 +201,40 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         output = "cottages:roof_flat_" .. name .. ' 2',
         recipe = {
             { 'cottages:roof_' .. name, 'cottages:roof_' .. name },
+        }
+    })
+
+    minetest.register_craft({
+        output = "cottages:roof_" .. name .. "_corner_inner 3",
+        recipe = {
+            { 'cottages:roof_' .. name, 'cottages:roof_' .. name },
+            { 'cottages:roof_' .. name, '' },
+        }
+    })
+
+    minetest.register_craft({
+        output = "cottages:roof_" .. name .. " 3",
+        recipe = {
+            { "cottages:roof_" .. name .. "_corner_inner",
+                "cottages:roof_" .. name .. "_corner_inner",
+                "cottages:roof_" .. name .. "_corner_inner" }
+        }
+    })
+
+    minetest.register_craft({
+        output = "cottages:roof_" .. name .. "_corner_outer 3",
+        recipe = {
+            { '',                       'cottages:roof_' .. name },
+            { 'cottages:roof_' .. name, 'cottages:roof_' .. name },
+        }
+    })
+
+    minetest.register_craft({
+        output = "cottages:roof_" .. name .. " 3",
+        recipe = {
+            { "cottages:roof_" .. name .. "_corner_outer",
+                "cottages:roof_" .. name .. "_corner_outer",
+                "cottages:roof_" .. name .. "_corner_outer" }
         }
     })
 
