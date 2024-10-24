@@ -155,8 +155,12 @@ function cottages.derive_blocks(modname, nodename, def)
             stairs.register_stair_and_slab(nodename, name,
             def.groups,
             def.tiles,
-            def.description,
-            def.sounds)
+            S("@1 Stairs", def.description),
+            S("@1 Slab", def.description),
+            def.sounds,
+            nil,
+            S("@1 Stairs (Inner)", def.description),
+            S("@1 Slab (Outer)", def.description))
         end
     end
 end

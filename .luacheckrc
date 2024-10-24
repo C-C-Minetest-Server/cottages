@@ -29,6 +29,7 @@ read_globals = {
     "doors",
     "farming",
     "stairs",
+    "stairsplus",
 
     table = {
         fields = {
