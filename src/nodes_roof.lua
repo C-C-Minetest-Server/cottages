@@ -327,7 +327,7 @@ cottages.register_vertical_roof("roof_vertical_asphalt", S("Vertical asphalt roo
 cottages.register_vertical_roof("roof_vertical_terracotta", S("Vertical terracotta roof"),
     "cottages_homedecor_shingles_terracotta.png", "default:clay_brick")
 cottages.register_vertical_roof("roof_vertical_wood", S("Vertical wooden roof"),
-    "default_tree.png", "default:clay_brick")
+    "default_tree.png", "group:tree")
 cottages.register_vertical_roof("roof_vertical_brown", S("Vertical brown shingle roof"),
     "cottages_homedecor_shingles_wood.png", "default:dirt")
 cottages.register_vertical_roof("roof_vertical_shingle", S("Vertical shingle roof"),
@@ -349,14 +349,6 @@ minetest.register_node("cottages:roof_vertical_wood", {
     groups = { cracky = 2, stone = 1 },
     sounds = default.node_sound_stone_defaults(),
     is_ground_content = false,
-})
-
-
-minetest.register_craft({
-    output = "cottages:roof_vertical_wood",
-    recipe = {
-        { "default:stone", "group:wood", "group:tree" }
-    }
 })
 
 ---------------------------------------------------------------------------------------
