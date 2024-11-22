@@ -1,13 +1,11 @@
 # textdomain: cottages
-### nodes_anvil.lua ###
 
-##[ _translations.lua ]##
-##[ src/nodes_anvil.lua ]##
-### nodes_anvil.lua ###
-### _translations.lua ###
 Inventory is not empty!=Инвентарь должен быть пуст!
 You are not the owner!=Вам это не принадлежит!
-
+@1 Stairs=@1 (ступени)
+@1 Slab=@1 (плита)
+@1 Stairs (Inner)=@1 (внутренние ступени)
+@1 Slab (Outer)=@1 (внешняя плита)
 ##[ src/nodes_anvil.lua ]##
 Steel hammer=Стальной молот
 For repairing tools on the anvil=Для починки инструментов на наковальне
@@ -18,9 +16,6 @@ Punch anvil with hammer to@nrepair tool in workpiece-slot.=Ударьте мол
 Anvil (owned by @1)=Наковальня (принадлежит @1)
 Can't dig node: @1=Невозможно добыть блок: @1
 The workpiece slot is for damaged tools only.=В слот заготовки можно поместить только повреждённые инструменты.
-
-##[ src/nodes_barrel.lua ]##
-### nodes_barrel.lua ###
 Pour:=Вылить@nв@nбочку
 Fill:=Наполнить из бочки
 Barrel (Closed)=Бочка (Закрыто)
@@ -28,18 +23,12 @@ Barrel (Opened)=Бочка (Открыто)
 Barrel (Closed), lying=Лежащая бочка (Закрыто)
 Barrel (Opened), lying=Лежащая бочка (Открыто)
 Tub=Кадка
-
-##[ src/nodes_doorlike.lua ]##
-### nodes_doorlike.lua ###
 Window shutters=Оконные ставни
 Half Door=Полудверца
 Half Door (Inverted)=Полудверца (Инвертированная)
 Fence Gate=Опускные ворота
 Wooden Hatch=Деревянный люк
 Metal Hatch=Металлический люк
-
-##[ src/nodes_feldweg.lua ]##
-### nodes_feldweg.lua ###
 Dirt road @1=Просёлочная дорога @1
 Dirt road crossing @1=Просёлочная дорога (перекрёсток) @1
 Dirt road T-junction @1=Просёлочная дорога (Т-образный перекрёсток) @1
@@ -58,16 +47,10 @@ on coniferious litter=на хвойной подстилке
 on snow=на снегу
 on dry dirt=на сухой земле
 on bamboo dirt=на бамбуковой земле
-
-##[ src/nodes_fences.lua ]##
-### nodes_fences.lua ###
 Small fence=Невысокая изгородь
 Small fence (corner)=Невысокая изгородь (угол)
 Small fence (end)=Невысокая изгородь (конец)
 Small fence (double)=Невысокая изгородь (двойная)
-
-##[ src/nodes_furniture.lua ]##
-### nodes_furniture.lua ###
 Bed=Кровать
 Sleeping mat=Спальный коврик
 sleeping mat with pillow=Спальный коврик с подушкой
@@ -80,29 +63,16 @@ stovepipe=Дымоход
 Washing Place=Умывальник
 Sorry. This washing place is out of water. Please place it above water!=Извините, но в этом умывальнике нет воды. Пожалуйста, разместите его над водой!
 You feel much cleaner after some washing.=Умывшись, вы чувствуете себя намного чище.
-
-##[ src/nodes_hay.lua ]##
-### nodes_hay.lua ###
 Hay mat=Коврик из сена
 Hay=Сено
 Hay bale=Тюк сена
-
-##[ src/nodes_historic.lua ]##
-### nodes_historic.lua ###
 Wagon Wheel=Колесо от повозки
 Loam=Суглинок
-Loam Stairs=Лестница из суглинка
-Loam Slab=Плита из суглинка
-Clay Stairs=Глиняная лестница
-Clay Slab=Глиняная плита
 straw ground for animals=Покрытая соломой земля для загона
 Simple Glass Pane=Простая стеклянная плита
 (centered)=(центр)
 Flat Wooden Planks=Плоские деревянные доски
 Wool for Tents=Шерстяное покрытие для палаток
-
-##[ src/nodes_mill.lua ]##
-### nodes_mill.lua ###
 Wheat seeds:=Зерно пшеницы:
 Flour:=Мука:
 Mill=Мельница
@@ -111,29 +81,12 @@ Mill, powered by punching=Ручная мельница
 Public mill, powered by punching=Публичная ручная мельница
 Private mill, powered by punching (owned by @1)=Частная ручная мельница (принадлежит @1)
 Processed @1 seeds=Переработано @1 зёрен
-
-##[ src/nodes_mill.lua ]##
-##[ src/nodes_threshing_floor.lua ]##
-##[ src/nodes_water.lua ]##
-### nodes_mill.lua ###
-### nodes_threshing_floor.lua ###
-### nodes_water.lua ###
-Public?=Публичное?
-
-##[ src/nodes_mining.lua ]##
-### nodes_mining.lua ###
 Rope for climbing=Верёвка для карабканья
 The entire rope would be too heavy. Start digging at its lowest end!=Верёвка будет слишком тяжёлой. Начинайте копать с её нижнего края!
 Ladder with rail support=Лестница с рельсами
-
-##[ src/nodes_pitchfork.lua ]##
-### nodes_pitchfork.lua ###
 Pitchfork=Вилы
 Dig dirt with grass to get hay, place with right-click=Добывайте дёрн, чтобы получить сено. Размещайте правой кнопкой мыши.
 pitchfork (for hay and straw)=Вилы (для соломы и сена)
-
-##[ src/nodes_roof.lua ]##
-### nodes_roof.lua ###
 @1 Roof=@1 крыша
 @1 Roof connector=@1 крыша (соединение)
 @1 Roof (flat) =@1 крыша (плоская)
@@ -147,15 +100,14 @@ Terracotta=Терракотовая
 Brown shingle=Коричневая черепичная
 Slate=Шиферная
 Vertical Slate=Покрытая вертикальным шифером
+Vertical asphalt roof=Вертикальная асфальтовая крыша
+Vertical terracotta roof=Вертикальная терракотовая крыша
+Vertical wooden roof=Вертикальная деревянная крыша
+Vertical brown shingle roof=Вертикальная коричневая гонтовая крыша
+Vertical shingle roof=Вертикальная гонтовая крыша
 Reed for thatching=Тростник для покрытия
-
-##[ src/nodes_straw.lua ]##
-### nodes_straw.lua ###
 Layer of straw=Соломенная подстилка
 Straw Bale=Соломенный тюк
-
-##[ src/nodes_threshing_floor.lua ]##
-### nodes_threshing_floor.lua ###
 Harvested wheat:=Собранная пшеница:
 Straw:=Солома:
 Seeds:=Зерно:
@@ -165,9 +117,6 @@ Threshing Floor=Гумно
 Public threshing floor=Публичное гумно
 Private threshing floor (owned by @1)=Частное гумно (принадлежит @1)
 Processed @1 wheats=Переработано @1 пшеницы
-
-##[ src/nodes_water.lua ]##
-### nodes_water.lua ###
 Punch the well while wielding an empty bucket.=Стукните по колодцу, держа в руках пустое ведро.
 Your bucket will slowly be filled with river water.=Ваше ведро постепенно наполнится речной водой.
 Punch again to get the bucket back when it is full.=Стукните ещё раз, чтобы забрать ведро, когда оно наполнится.
@@ -179,3 +128,12 @@ Private tree trunk well (owned by @1)=Частный бревенчатый ко
 This tree trunk well is owned by @1. You can't use it.=Этот бревенчатый колодец принадлежит @1. Вы не можете его использовать.
 Insufficient inventory room for the bucket!=Недостаточно места в инвентаре, чтобы поднять ведро!
 Please wait until your bucket has been filled.=Пожалуйста, подождите, пока ваше ведро наполнится.
+Public?=Публичное?
+
+
+##### not used anymore #####
+
+Loam Stairs=Лестница из суглинка
+Loam Slab=Плита из суглинка
+Clay Stairs=Глиняная лестница
+Clay Slab=Глиняная плита
