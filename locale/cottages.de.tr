@@ -2,10 +2,10 @@
 
 Inventory is not empty!=
 You are not the owner!=
-@1 Stairs=
-@1 Slab=
-@1 Stairs (Inner)=
-@1 Slab (Outer)=
+@1 Stairs=@1 Treppe
+@1 Slab=@1 Stufe
+@1 Stairs (Inner)=@1 Treppe (Innen)
+@1 Slab (Outer)=@1 Stufe (Außen)
 ##[ src/nodes_anvil.lua ]##
 Steel hammer=
 For repairing tools on the anvil=
@@ -87,11 +87,11 @@ Ladder with rail support=
 Pitchfork=
 Dig dirt with grass to get hay, place with right-click=
 pitchfork (for hay and straw)=
-@1 Roof=
+@1 Roof=@1 Dach
 @1 Roof connector=
 @1 Roof (flat) =
-@1 Roof (inner corner) =
-@1 Roof (outer corner) =
+@1 Roof (inner corner) =@1 Dach (Innenecke) 
+@1 Roof (outer corner) =@1 Dach (Außenecke) 
 Straw=
 Reet=
 Wooden=
@@ -100,11 +100,11 @@ Terracotta=
 Brown shingle=
 Slate=
 Vertical Slate=
-Vertical asphalt roof=
-Vertical terracotta roof=
-Vertical wooden roof=
-Vertical brown shingle roof=
-Vertical shingle roof=
+Vertical asphalt roof=Vertikales Asphaltdach
+Vertical terracotta roof=Vertikales Terrakottadach
+Vertical wooden roof=Vertikales Holzdach
+Vertical brown shingle roof=Vertikales braunes Schindeldach
+Vertical shingle roof=Vertikales Schindeldach
 Reed for thatching=
 Layer of straw=
 Straw Bale=
@@ -128,7 +128,7 @@ Private tree trunk well (owned by @1)=
 This tree trunk well is owned by @1. You can't use it.=
 Insufficient inventory room for the bucket!=
 Please wait until your bucket has been filled.=
-Public?=
+Public?=Öffentlich?
 
 
 ##### not used anymore #####
