@@ -20,7 +20,7 @@
 
 local S = cottages.S
 
-minetest.register_node("cottages:bed_foot", {
+core.register_node("cottages:bed_foot", {
     description = S("Bed"),
     drawtype = "nodebox",
     tiles = {
@@ -58,31 +58,31 @@ minetest.register_node("cottages:bed_foot", {
     is_ground_content = false,
 
     on_construct = function(pos)
-        local node = minetest.get_node(pos)
-        local direction = minetest.facedir_to_dir(node.param2)
+        local node = core.get_node(pos)
+        local direction = core.facedir_to_dir(node.param2)
         local pos2 = vector.add(pos, direction)
 
-        if minetest.get_node(pos2).name == "air" then
-            minetest.set_node(pos2, {
+        if core.get_node(pos2).name == "air" then
+            core.set_node(pos2, {
                 name = "cottages:bed_head",
                 param2 = node.param2
             })
         end
     end,
     on_destruct = function(pos)
-        local node = minetest.get_node(pos)
-        local direction = minetest.facedir_to_dir(node.param2)
+        local node = core.get_node(pos)
+        local direction = core.facedir_to_dir(node.param2)
         local pos2 = vector.add(pos, direction)
-        local node2 = minetest.get_node(pos2)
+        local node2 = core.get_node(pos2)
 
         if node2.name == "cottages:bed_head" and node2.param2 == node.param2 then
-            minetest.remove_node(pos2)
-            minetest.check_for_falling(pos2)
+            core.remove_node(pos2)
+            core.check_for_falling(pos2)
         end
     end,
 })
 
-minetest.register_node("cottages:bed_head", {
+core.register_node("cottages:bed_head", {
     drawtype = "nodebox",
     tiles = {
         "cottages_beds_bed_top_top.png",
@@ -120,27 +120,27 @@ minetest.register_node("cottages:bed_head", {
 
     drop = "cottages:bed_foot",
     on_destruct = function(pos)
-        local node = minetest.get_node(pos)
-        local direction = minetest.facedir_to_dir(node.param2)
+        local node = core.get_node(pos)
+        local direction = core.facedir_to_dir(node.param2)
         local root_pos = vector.subtract(pos, direction)
 
-        minetest.swap_node(pos, { name = "air" })
+        core.swap_node(pos, { name = "air" })
 
-        local root_node = minetest.get_node(root_pos)
+        local root_node = core.get_node(root_pos)
         if root_node.name == "cottages:bed_foot" and root_node.param2 == node.param2 then
-            minetest.remove_node(root_pos)
-            minetest.check_for_falling(root_pos)
+            core.remove_node(root_pos)
+            core.check_for_falling(root_pos)
         end
     end,
 
     on_place = function(itemstack, placer, pointed_thing)
         itemstack:set_name("cottages:bed_foot")
-        minetest.item_place(itemstack, placer, pointed_thing)
+        core.item_place(itemstack, placer, pointed_thing)
         return itemstack
     end
 })
 
-minetest.register_node("cottages:sleeping_mat", {
+core.register_node("cottages:sleeping_mat", {
     description = S("Sleeping mat"),
     drawtype = 'nodebox',
     tiles = { 'cottages_sleepingmat.png' }, -- done by VanessaE
@@ -167,7 +167,7 @@ minetest.register_node("cottages:sleeping_mat", {
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:sleeping_mat_head", {
+core.register_node("cottages:sleeping_mat_head", {
     description = S("sleeping mat with pillow"),
     drawtype = 'nodebox',
     tiles = { 'cottages_sleepingmat.png' }, -- done by VanessaE
@@ -194,7 +194,7 @@ minetest.register_node("cottages:sleeping_mat_head", {
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:bench", {
+core.register_node("cottages:bench", {
     drawtype = "nodebox",
     description = S("simple wooden bench"),
     tiles = {
@@ -229,7 +229,7 @@ minetest.register_node("cottages:bench", {
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:table", {
+core.register_node("cottages:table", {
     description = S("Table"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -275,7 +275,7 @@ local shelf_def = {
     selection_box = shelf_box,
 
     on_construct = function(pos)
-        local meta = minetest.get_meta(pos);
+        local meta = core.get_meta(pos);
 
         meta:set_string("formspec",
             "size[8,8]" ..
@@ -289,17 +289,17 @@ local shelf_def = {
     end,
 
     can_dig = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv = meta:get_inventory()
         return inv:is_empty("main")
     end,
 
     on_metadata_inventory_put = function(pos)
-        local meta = minetest.get_meta(pos);
+        local meta = core.get_meta(pos);
         meta:set_string('infotext', S('Open storage shelf') .. " " .. S("(in use)"));
     end,
     on_metadata_inventory_take = function(pos)
-        local meta = minetest.get_meta(pos);
+        local meta = core.get_meta(pos);
         local inv = meta:get_inventory();
         if inv:is_empty("main") then
             meta:set_string('infotext', S('Open storage shelf') .. " " .. S("(empty)"));
@@ -308,9 +308,9 @@ local shelf_def = {
     is_ground_content = false,
 }
 default.set_inventory_action_loggers(shelf_def, "open storage shelf")
-minetest.register_node("cottages:shelf", shelf_def)
+core.register_node("cottages:shelf", shelf_def)
 
-minetest.register_node("cottages:stovepipe", {
+core.register_node("cottages:stovepipe", {
     description = S("stovepipe"),
     drawtype = "nodebox",
     tiles = { "cottages_steel_block.png" },
@@ -339,7 +339,7 @@ local waters = {
     ['default:river_water_source'] = true,
     ['default:river_water_flowing'] = true,
 }
-minetest.register_node("cottages:washing", {
+core.register_node("cottages:washing", {
     description = S("Washing Place"),
     drawtype = "nodebox",
     tiles = { "cottages_clay.png" },
@@ -364,12 +364,12 @@ minetest.register_node("cottages:washing", {
         if not player:is_player() then return end
         local pname = player:get_player_name()
         -- works only with water beneath
-        local node_under = minetest.get_node({ x = pos.x, y = (pos.y - 1), z = pos.z });
+        local node_under = core.get_node({ x = pos.x, y = (pos.y - 1), z = pos.z });
         if not waters[node_under.name] then
-            minetest.chat_send_player(pname,
+            core.chat_send_player(pname,
                 S("Sorry. This washing place is out of water. Please place it above water!"));
         else
-            minetest.chat_send_player(pname, S("You feel much cleaner after some washing."));
+            core.chat_send_player(pname, S("You feel much cleaner after some washing."));
         end
     end,
     is_ground_content = false,
@@ -379,7 +379,7 @@ minetest.register_node("cottages:washing", {
 ---------------------------------------------------------------------------------------
 -- crafting receipes
 ---------------------------------------------------------------------------------------
-minetest.register_craft({
+core.register_craft({
     output = "cottages:bed_foot",
     recipe = {
         { "wool:white",  "", "", },
@@ -388,7 +388,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:bed_head",
     recipe = {
         { "", "",            "wool:white", },
@@ -397,7 +397,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:sleeping_mat 3",
     recipe = {
         { "cottages:wool_tent", "cottages:straw_mat", "cottages:straw_mat" }
@@ -405,14 +405,14 @@ minetest.register_craft({
 })
 
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:sleeping_mat_head",
     recipe = {
         { "cottages:sleeping_mat", "cottages:straw_mat" }
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:table",
     recipe = {
         { "", "stairs:slab_wood", "", },
@@ -420,7 +420,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:bench",
     recipe = {
         { "",            "group:wood", "", },
@@ -429,7 +429,7 @@ minetest.register_craft({
 })
 
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:shelf",
     recipe = {
         { "group:stick", "group:wood", "group:stick", },
@@ -438,7 +438,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:washing 2",
     recipe = {
         { "group:stick" },
@@ -446,7 +446,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:stovepipe 2",
     recipe = {
         { "default:steel_ingot", '', "default:steel_ingot" },

@@ -19,7 +19,7 @@
 ]]
 
 local S = cottages.S
-local F = minetest.formspec_escape
+local F = core.formspec_escape
 
 cottages.handmill_product = {}
 cottages.handmill_product["farming:seed_wheat"] = 'farming:flour 1'
@@ -66,7 +66,7 @@ local def = {
     _private_translate_key = "Private mill, powered by punching (owned by @1)",
 
     on_construct = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv = meta:get_inventory()
 
         inv:set_size("seeds", 1)
@@ -80,7 +80,7 @@ local def = {
     after_place_node = function(pos, placer)
         if not placer:is_player() then return end
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local pname = placer:get_player_name()
 
         meta:set_string("owner", pname);
@@ -92,7 +92,7 @@ local def = {
 
     can_dig = function(pos, player)
         if not (player and player:is_player()) then return end
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local owner = meta:get_string("owner")
         local pname = player:get_player_name()
 
@@ -105,7 +105,7 @@ local def = {
     end,
 
     allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, _, count, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
         end
@@ -123,7 +123,7 @@ local def = {
     end,
 
     allow_metadata_inventory_put = function(pos, listname, _, stack, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
         end
@@ -139,14 +139,14 @@ local def = {
     end,
 
     allow_metadata_inventory_take = function(pos, _, _, stack, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         return cottages.player_can_use(meta, player) and stack:get_count() or 0
     end,
 
     on_punch = function(pos, node, puncher)
         if not puncher:is_player() then return end
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, puncher) then
             return
         end
@@ -171,7 +171,7 @@ local def = {
         end
 
         node.param2 = (node.param2 + 1) % 4
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
 
         local infotext = cottages.get_public_infotext(pos)
         infotext = infotext .. "\n" .. S("Processed @1 seeds", anz)
@@ -181,9 +181,9 @@ local def = {
 
 default.set_inventory_action_loggers(def, "hand mill")
 
-minetest.register_node("cottages:handmill", def)
+core.register_node("cottages:handmill", def)
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:handmill",
     recipe = {
         { "group:stick", "default:stone",       "", },

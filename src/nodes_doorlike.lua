@@ -25,26 +25,26 @@ local S = cottages.S
 local function shutter_post_operate(pos, param2, old, new)
     for _, i in ipairs({ 1, 2, 3 }) do
         local targ_pos = vector.add(pos, { x = 0, y = i, z = 0 })
-        local targ_node = minetest.get_node(targ_pos)
+        local targ_node = core.get_node(targ_pos)
         if targ_node.name ~= old or targ_node.param2 ~= param2 then
             break
         end
         targ_node.name = new
-        minetest.swap_node(targ_pos, targ_node)
+        core.swap_node(targ_pos, targ_node)
     end
 
     for _, i in ipairs({ -1, -2, -3 }) do
         local targ_pos = vector.add(pos, { x = 0, y = i, z = 0 })
-        local targ_node = minetest.get_node(targ_pos)
+        local targ_node = core.get_node(targ_pos)
         if targ_node.name ~= old or targ_node.param2 ~= param2 then
             break
         end
         targ_node.name = new
-        minetest.swap_node(targ_pos, targ_node)
+        core.swap_node(targ_pos, targ_node)
     end
 end
 
-minetest.register_node("cottages:window_shutter_open", {
+core.register_node("cottages:window_shutter_open", {
     description = S("Window shutters"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -68,13 +68,13 @@ minetest.register_node("cottages:window_shutter_open", {
     },
     on_rightclick = function(pos, node)
         node.name = "cottages:window_shutter_closed"
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
         shutter_post_operate(pos, node.param2, "cottages:window_shutter_open", "cottages:window_shutter_closed");
     end,
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:window_shutter_closed", {
+core.register_node("cottages:window_shutter_closed", {
     description = S("Window shutters"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -97,14 +97,14 @@ minetest.register_node("cottages:window_shutter_closed", {
     },
     on_rightclick = function(pos, node)
         node.name = "cottages:window_shutter_open"
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
         shutter_post_operate(pos, node.param2, "cottages:window_shutter_closed", "cottages:window_shutter_open");
     end,
     is_ground_content = false,
     drop = "cottages:window_shutter_open",
 })
 
-minetest.register_node("cottages:half_door", {
+core.register_node("cottages:half_door", {
     description = S("Half Door"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -136,22 +136,22 @@ minetest.register_node("cottages:half_door", {
         elseif param2 == 0 then
             new_node.param2 = node.param2 + 3; --3;
         end;
-        minetest.swap_node(pos, new_node)
+        core.swap_node(pos, new_node)
 
         -- if the node above consists of a door of the same type, open it as well
         -- Note: doors beneath this one are not opened!
         -- It is a special feature of these doors that they can be opend partly
         local pos2 = vector.add(pos, { x = 0, y = 1, z = 0 })
-        local node2 = minetest.get_node(pos2)
+        local node2 = core.get_node(pos2)
         if node2.name == node.name and node2.param2 == node.param2 then
-            minetest.swap_node(pos2, new_node)
+            core.swap_node(pos2, new_node)
         end
     end,
     is_ground_content = false,
 })
 
 
-minetest.register_node("cottages:half_door_inverted", {
+core.register_node("cottages:half_door_inverted", {
     description = S("Half Door (Inverted)"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -183,21 +183,21 @@ minetest.register_node("cottages:half_door_inverted", {
         elseif param2 == 3 then
             new_node.param2 = node.param2 - 1; --2;
         end;
-        minetest.swap_node(pos, new_node)
+        core.swap_node(pos, new_node)
 
         -- if the node above consists of a door of the same type, open it as well
         -- Note: doors beneath this one are not opened!
         -- It is a special feature of these doors that they can be opend partly
         local pos2 = vector.add(pos, { x = 0, y = 1, z = 0 })
-        local node2 = minetest.get_node(pos2)
+        local node2 = core.get_node(pos2)
         if node2.name == node.name and node2.param2 == node.param2 then
-            minetest.swap_node(pos2, new_node)
+            core.swap_node(pos2, new_node)
         end
     end,
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:gate_closed", {
+core.register_node("cottages:gate_closed", {
     description = S("Fence Gate"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -225,12 +225,12 @@ minetest.register_node("cottages:gate_closed", {
     },
     on_rightclick = function(pos, node)
         node.name = "cottages:gate_open"
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
     end,
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:gate_open", {
+core.register_node("cottages:gate_open", {
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
     tiles = { "cottages_minimal_wood.png" },
@@ -258,7 +258,7 @@ minetest.register_node("cottages:gate_open", {
     },
     on_rightclick = function(pos, node)
         node.name = "cottages:gate_closed"
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
     end,
     is_ground_content = false,
     drop = "cottages:gate_closed",
@@ -266,7 +266,7 @@ minetest.register_node("cottages:gate_open", {
 
 local new_facedirs = { 10, 19, 4, 13, 2, 18, 22, 14, 20, 16, 0, 12, 11, 3, 7, 21, 9, 23, 5, 1, 8, 15, 6, 17 }
 cottages.register_hatch = function(nodename, description, texture, receipe_item, sounds)
-    minetest.register_node(nodename, {
+    core.register_node(nodename, {
         description = description, -- not that there are any other...
         drawtype = "nodebox",
         -- top, bottom, side1, side2, inner, outer
@@ -303,13 +303,13 @@ cottages.register_hatch = function(nodename, description, texture, receipe_item,
         },
         on_rightclick = function(pos, node)
             node.param2 = new_facedirs[node.param2 + 1] or 0
-            minetest.swap_node(pos, node)
+            core.swap_node(pos, node)
         end,
         is_ground_content = false,
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = nodename,
         recipe = {
             { '',           '',              receipe_item },
@@ -329,7 +329,7 @@ cottages.register_hatch(
     default.node_sound_metal_defaults())
 
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:window_shutter_open",
     recipe = {
         { "group:wood", "", "group:wood" },
@@ -337,21 +337,21 @@ minetest.register_craft({
 })
 
 -- transform one half door into another
-minetest.register_craft({
+core.register_craft({
     output = "cottages:half_door",
     recipe = {
         { "cottages:half_door_inverted" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:half_door_inverted",
     recipe = {
         { "cottages:half_door" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:half_door 2",
     recipe = {
         { "", "group:wood",      "" },
@@ -361,21 +361,21 @@ minetest.register_craft({
 
 
 -- transform open and closed versions into into another for convenience
-minetest.register_craft({
+core.register_craft({
     output = "cottages:gate_closed",
     recipe = {
         { "cottages:gate_open" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:gate_open",
     recipe = {
         { "cottages:gate_closed" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:gate_closed",
     recipe = {
         { "default:stick", "default:stick", "group:wood" },

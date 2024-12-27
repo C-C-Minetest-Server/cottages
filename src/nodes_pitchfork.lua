@@ -24,17 +24,17 @@ local S = cottages.S
 -- the straw node from default and similar nodes can be digged with the pitchfork as well
 local add_hay_group = { "farming:straw", "dryplants:reed", "darkage:straw_bale" }
 for _, name in ipairs(add_hay_group) do
-	if minetest.registered_items[name] then
-		local new_groups = table.copy(minetest.registered_items[name].groups)
+	if core.registered_items[name] then
+		local new_groups = table.copy(core.registered_items[name].groups)
 		new_groups.hay = 3
-		minetest.override_item(name, { groups = new_groups })
+		core.override_item(name, { groups = new_groups })
 	end
 end
 
 -- creates hay when digging dirt_with_grass (thanks to the override above);
 -- useful for digging hay and straw
 -- can be placed as a node
-minetest.register_tool("cottages:pitchfork", {
+core.register_tool("cottages:pitchfork", {
 	short_description = S("Pitchfork"),
 	description = S("Pitchfork") .. "\n" .. S("Dig dirt with grass to get hay, place with right-click"),
 	inventory_image = "cottages_pitchfork.png",
@@ -59,23 +59,23 @@ minetest.register_tool("cottages:pitchfork", {
 		if placer == nil or pointed_thing == nil or pointed_thing.type ~= "node" then
 			return nil
 		end
-		local pos  = minetest.get_pointed_thing_position(pointed_thing, true)
-		local node = minetest.get_node_or_nil(pos)
+		local pos  = core.get_pointed_thing_position(pointed_thing, true)
+		local node = core.get_node_or_nil(pos)
 		if node == nil or node.name ~= "air" then
 			return nil
 		end
-		if minetest.is_protected(pos, placer:get_player_name()) then
+		if core.is_protected(pos, placer:get_player_name()) then
 			return nil
 		end
-		minetest.rotate_and_place(ItemStack("cottages:pitchfork_placed"), placer, pointed_thing)
+		core.rotate_and_place(ItemStack("cottages:pitchfork_placed"), placer, pointed_thing)
 		-- did the placing succeed? (Check code by Smacker)
-		if not minetest.find_nodes_in_area(
+		if not core.find_nodes_in_area(
 				{ x = pos.x, y = pos.y - 1, z = pos.z },
 				{ x = pos.x, y = pos.y + 1, z = pos.z },
 				{ "cottages:pitchfork_placed" })[1] then
 			return nil
 		end
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		meta:set_int("wear", itemstack:get_wear())
 		meta:set_string("infotext", S("pitchfork (for hay and straw)"))
 		-- the tool has been placed; consume it
@@ -85,7 +85,7 @@ minetest.register_tool("cottages:pitchfork", {
 })
 
 -- a ptichfork placed somewhere
-minetest.register_node("cottages:pitchfork_placed", {
+core.register_node("cottages:pitchfork_placed", {
 	tiles = { "default_wood.png^[transformR90" },
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -122,7 +122,7 @@ minetest.register_node("cottages:pitchfork_placed", {
 --
 -- craft recipes
 --
-minetest.register_craft({
+core.register_craft({
 	output = 'cottages:pitchfork',
 	recipe = {
 		{ 'default:stick', 'default:stick', 'default:stick' },

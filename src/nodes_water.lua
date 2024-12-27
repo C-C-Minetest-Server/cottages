@@ -21,7 +21,7 @@
 cottages.water_fill_time = 10
 
 local S = cottages.S
-local F = minetest.formspec_escape
+local F = core.formspec_escape
 
 -- Key: item name of the bucket
 -- Value: item name if it is filled with river water, "" if already filled
@@ -48,7 +48,7 @@ cottages.well_empty_buckets = {
 }
 
 -- Old entity should vanish to avodi issues
-minetest.register_entity("cottages:bucket_entity", {
+core.register_entity("cottages:bucket_entity", {
     initial_properties = {
         hp_max = 1,
         visual = "wielditem",
@@ -64,7 +64,7 @@ minetest.register_entity("cottages:bucket_entity", {
 })
 
 -- code taken from the itemframes mod in homedecor
-minetest.register_entity("cottages:bucket_entity_new", {
+core.register_entity("cottages:bucket_entity_new", {
     initial_properties = {
         hp_max = 1,
         visual = "wielditem",
@@ -81,7 +81,7 @@ minetest.register_entity("cottages:bucket_entity_new", {
     end,
     on_activate = function(self)
         if self.well_pos then
-            local well_node = minetest.get_node(self.well_pos)
+            local well_node = core.get_node(self.well_pos)
             if well_node.name == "cottages:water_gen" then
                 return
             end
@@ -92,7 +92,7 @@ minetest.register_entity("cottages:bucket_entity_new", {
 
 local function spawn_well_entity(pos, item_name)
     local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
-    local obj = minetest.add_entity(up_pos, "cottages:bucket_entity_new")
+    local obj = core.add_entity(up_pos, "cottages:bucket_entity_new")
     if obj then
         obj:get_luaentity():set_item(pos, item_name)
     end
@@ -101,7 +101,7 @@ end
 
 local function alter_well_entity(pos, item_name)
     local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
-    local objs = minetest.get_objects_inside_radius(up_pos, 0.5)
+    local objs = core.get_objects_inside_radius(up_pos, 0.5)
 
     local del = false
     for _, obj in ipairs(objs) do
@@ -122,7 +122,7 @@ end
 
 local function remove_well_entity(pos)
     local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
-    local objs = minetest.get_objects_inside_radius(up_pos, 0.5)
+    local objs = core.get_objects_inside_radius(up_pos, 0.5)
 
     for _, obj in ipairs(objs) do
         local luaentity = obj:get_luaentity()
@@ -137,7 +137,7 @@ end
 
 local function check_well_entity(pos, item_name)
     local up_pos = vector.add(pos, { x = 0, y = 4 / 16, z = 0 })
-    local objs = minetest.get_objects_inside_radius(up_pos, 0.5)
+    local objs = core.get_objects_inside_radius(up_pos, 0.5)
 
     local del = false
     for _, obj in ipairs(objs) do
@@ -215,7 +215,7 @@ local def = {
     _private_translate_key = "Private tree trunk well (owned by @1)",
 
     on_construct = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv = meta:get_inventory()
 
         inv:set_size('main', 6)
@@ -228,7 +228,7 @@ local def = {
     after_place_node = function(pos, placer)
         if not placer:is_player() then return end
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local pname = placer:get_player_name()
 
         meta:set_string("owner", pname);
@@ -238,7 +238,7 @@ local def = {
 
     can_dig = function(pos, player)
         if not (player and player:is_player()) then return end
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local owner = meta:get_string("owner")
         local pname = player:get_player_name()
 
@@ -255,12 +255,12 @@ local def = {
             -- That inventory slot is handled only by mod
             return 0
         end
-        return cottages.player_can_use(minetest.get_meta(pos), player) and count or 0
+        return cottages.player_can_use(core.get_meta(pos), player) and count or 0
     end,
 
     allow_metadata_inventory_put = function(pos, listname, _, stack, player)
         if listname == "main" then
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not cottages.player_can_use(meta, player) then
                 return 0
             end
@@ -275,7 +275,7 @@ local def = {
 
     allow_metadata_inventory_take = function(pos, listname, _, stack, player)
         if listname == "main" then
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not cottages.player_can_use(meta, player) then
                 return 0
             end
@@ -286,9 +286,9 @@ local def = {
     end,
 
     on_blast = function(pos)
-        minetest.get_node_timer(pos):stop()
+        core.get_node_timer(pos):stop()
         cottages.drop_inventory(pos, { "main", "bucket" })
-        minetest.remove_node(pos)
+        core.remove_node(pos)
     end,
 
     on_receive_fields = cottages.on_public_receive_fields,
@@ -297,10 +297,10 @@ local def = {
         if not (puncher and puncher:is_player()) then return end
 
         local pname = puncher:get_player_name()
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, puncher) then
             local owner = meta:get_string("owner")
-            minetest.chat_send_player(pname,
+            core.chat_send_player(pname,
                 S("This tree trunk well is owned by @1. You can't use it.", owner))
         end
 
@@ -314,7 +314,7 @@ local def = {
                 -- That is, liquid filled
                 -- Or it is invalid (avoid them sticking inside forever)
                 if not pinv:room_for_item("main", bucket) then
-                    minetest.chat_send_player(pname,
+                    core.chat_send_player(pname,
                         S("Insufficient inventory room for the bucket!"))
                     return
                 end
@@ -322,12 +322,12 @@ local def = {
                 pinv:add_item("main", bucket)
                 inv:set_stack("bucket", 1, "")
 
-                minetest.log("action", string.format(
+                core.log("action", string.format(
                     "%s takes %s from tree trunk well at %s",
-                    pname, bucket:to_string(), minetest.pos_to_string(pos)
+                    pname, bucket:to_string(), core.pos_to_string(pos)
                 ))
             else
-                minetest.chat_send_player(pname,
+                core.chat_send_player(pname,
                     S("Please wait until your bucket has been filled."))
             end
             return
@@ -346,20 +346,20 @@ local def = {
             inv:set_stack("bucket", 1, hand_bucket)
             puncher:set_wielded_item(stack)
 
-            minetest.log("action", string.format(
+            core.log("action", string.format(
                 "%s moves %s to tree trunk well at %s",
-                pname, hand_bucket:to_string(), minetest.pos_to_string(pos)
+                pname, hand_bucket:to_string(), core.pos_to_string(pos)
             ))
 
             spawn_well_entity(pos, stack_name)
 
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             timer:start(cottages.water_fill_time)
         end
     end,
 
     on_timer = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv = meta:get_inventory()
 
         local stack = inv:get_stack("bucket", 1)
@@ -371,15 +371,15 @@ local def = {
     end,
 }
 default.set_inventory_action_loggers(def, "tree trunk well")
-minetest.register_node("cottages:water_gen", def)
+core.register_node("cottages:water_gen", def)
 
-minetest.register_lbm({
+core.register_lbm({
     label = "Move legacy bucket into inventory",
     name = "cottages:water_compact_legacy",
     nodenames = { 'cottages:water_gen' },
     run_at_every_load = false,
     action = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local bucket = meta:get_string("bucket")
         if bucket ~= "" then
             local inv = meta:get_inventory()
@@ -390,19 +390,19 @@ minetest.register_lbm({
             meta:set_string("fillstarttime", "")
 
             -- Start timer, assume just started
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             timer:start(cottages.water_fill_time)
         end
     end,
 })
 
-minetest.register_lbm({
+core.register_lbm({
     label = "Respawn vanished bucket entity",
     name = "cottages:water_spawn_entityy",
     nodenames = { 'cottages:water_gen' },
     run_at_every_load = true,
     action = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv = meta:get_inventory()
         local bucket = inv:get_stack("bucket", 1)
 
@@ -413,7 +413,7 @@ minetest.register_lbm({
 })
 
 
-minetest.register_craft({
+core.register_craft({
     output = 'cottages:water_gen',
     recipe = {
         { 'default:stick', '',                    '' },

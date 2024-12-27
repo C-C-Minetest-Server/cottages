@@ -19,9 +19,9 @@
 ]]
 
 local S = cottages.S
-local F = minetest.formspec_escape
+local F = core.formspec_escape
 
-minetest.register_tool("cottages:hammer", {
+core.register_tool("cottages:hammer", {
     short_description = S("Steel hammer"),
     description       = S("Steel hammer") .. "\n" .. S("For repairing tools on the anvil"),
     image             = "glooptest_tool_steelhammer.png",
@@ -70,7 +70,7 @@ local function check_tool_input(stack)
     end
 
     local name = stack:get_name()
-    local def = minetest.registered_tools[name]
+    local def = core.registered_tools[name]
     if def then
         if def.wear_represents then
             -- Probably not normal tools
@@ -85,7 +85,7 @@ end
 
 local player_huds = {}
 local function clear_hud(pname)
-    local player = minetest.get_player_by_name(pname)
+    local player = core.get_player_by_name(pname)
     if player and player_huds[pname] then
         if player_huds[pname].hud1 then
             player:hud_remove(player_huds[pname].hud1)
@@ -101,7 +101,7 @@ local function clear_hud(pname)
     player_huds[pname] = nil
 end
 
-minetest.register_on_leaveplayer(function(player)
+core.register_on_leaveplayer(function(player)
     local pname = player:get_player_name()
     if player_huds[pname] then
         player_huds[pname].job:cancel()
@@ -123,7 +123,7 @@ local def = {
     is_ground_content = false,
 
     on_construct = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv  = meta:get_inventory()
 
         meta:set_string("infotext", S("Anvil"))
@@ -134,7 +134,7 @@ local def = {
     after_place_node = function(pos, placer)
         if not placer:is_player() then return end
 
-        local meta  = minetest.get_meta(pos)
+        local meta  = core.get_meta(pos)
         local pname = placer:get_player_name()
         meta:set_string("owner", pname)
         meta:set_string("infotext", S("Anvil (owned by @1)", pname))
@@ -143,17 +143,17 @@ local def = {
     can_dig = function(pos, player)
         if not player:is_player() then return end
 
-        local meta  = minetest.get_meta(pos)
+        local meta  = core.get_meta(pos)
         local pname = player:get_player_name()
 
         if not cottages.player_can_use(meta, player) then
-            minetest.chat_send_player(pname, S("Can't dig node: @1", S("You are not the owner!")))
+            core.chat_send_player(pname, S("Can't dig node: @1", S("You are not the owner!")))
             return false
         end
 
         local inv = meta:get_inventory()
         if not cottages.check_inventory_empty(inv, { "input", "hammer" }) then
-            minetest.chat_send_player(pname, S("Can't dig node: @1", S("Inventory is not empty!")))
+            core.chat_send_player(pname, S("Can't dig node: @1", S("Inventory is not empty!")))
             return false
         end
 
@@ -161,7 +161,7 @@ local def = {
     end,
 
     allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, _, count, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
 
         if to_list == "input" then
             local inv = meta:get_inventory()
@@ -172,7 +172,7 @@ local def = {
             end
             local pname = player:get_player_name()
             if pname ~= "" then
-                minetest.chat_send_player(pname, S("The workpiece slot is for damaged tools only."))
+                core.chat_send_player(pname, S("The workpiece slot is for damaged tools only."))
             end
             return 0
         end
@@ -182,7 +182,7 @@ local def = {
     allow_metadata_inventory_put = function(pos, listname, _, stack, player)
         if listname == "hammer" then
             if stack:get_name() ~= "cottages:hammer" then return 0 end
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             return cottages.player_can_use(meta, player) and 1 or 0
         elseif listname == "input" then
             if check_tool_input(stack) then
@@ -190,7 +190,7 @@ local def = {
             end
             local pname = player:get_player_name()
             if pname ~= "" then
-                minetest.chat_send_player(pname, S("The workpiece slot is for damaged tools only."))
+                core.chat_send_player(pname, S("The workpiece slot is for damaged tools only."))
             end
             return 0
         end
@@ -198,7 +198,7 @@ local def = {
     end,
     allow_metadata_inventory_take = function(pos, listname, _, stack, player)
         if listname ~= "input" then
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not cottages.player_can_use(meta, player) then
                 return 0
             end
@@ -214,7 +214,7 @@ local def = {
         end
 
         local pname = puncher:get_player_name();
-        local meta  = minetest.get_meta(pos);
+        local meta  = core.get_meta(pos);
         local inv   = meta:get_inventory();
 
         local input = inv:get_stack("input", 1)
@@ -224,7 +224,7 @@ local def = {
         end
 
         local tool_name = input:get_name()
-        local tool_def = minetest.registered_tools[tool_name]
+        local tool_def = core.registered_tools[tool_name]
 
         local hud_image
         if tool_def then
@@ -304,7 +304,7 @@ local def = {
             end
         end
 
-        player_huds[pname].job = minetest.after(2, clear_hud, pname)
+        player_huds[pname].job = core.after(2, clear_hud, pname)
 
         -- do the actual repair
         input:add_wear(-5000) -- equals to what technic toolshop does in 5 seconds
@@ -318,9 +318,9 @@ local def = {
 
 default.set_inventory_action_loggers(def, "anvil")
 
-minetest.register_node("cottages:anvil", def)
+core.register_node("cottages:anvil", def)
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:anvil",
     recipe = {
         { "default:steel_ingot", "default:steel_ingot", "default:steel_ingot" },
@@ -329,8 +329,8 @@ minetest.register_craft({
 })
 
 -- the castle-mod has an anvil as well - with the same receipe. convert the two into each other
-if minetest.get_modpath("castle") ~= nil then
-    minetest.unregister_craft({
+if core.get_modpath("castle") ~= nil then
+    core.unregister_craft({
         output = "castle:anvil",
         recipe = {
             { "default:steel_ingot", "default:steel_ingot", "default:steel_ingot" },
@@ -338,14 +338,14 @@ if minetest.get_modpath("castle") ~= nil then
             { "default:steel_ingot", "default:steel_ingot", "default:steel_ingot" } },
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:anvil",
         recipe = {
             { 'castle:anvil' },
         },
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "castle:anvil",
         recipe = {
             { 'cottages:anvil' },
@@ -353,7 +353,7 @@ if minetest.get_modpath("castle") ~= nil then
     })
 end
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:hammer",
     recipe = {
         { "default:steel_ingot" },

@@ -22,7 +22,7 @@ local S = cottages.S
 
 -- an even simpler from of bed - usually for animals
 -- it is a nodebox and not wallmounted because that makes it easier to replace beds with straw mats
-minetest.register_node("cottages:straw_mat", {
+core.register_node("cottages:straw_mat", {
     description = S("Layer of straw"),
     drawtype = 'nodebox',
     tiles = { "cottages_darkage_straw.png" }, -- done by VanessaE
@@ -51,7 +51,7 @@ minetest.register_node("cottages:straw_mat", {
 
 -- straw bales are a must for farming environments;
 -- if you for some reason do not have the darkage mod installed, this here gets you a straw bale
-minetest.register_node("cottages:straw_bale", {
+core.register_node("cottages:straw_bale", {
     drawtype = "nodebox",
     description = S("Straw Bale"),
     tiles = { "cottages_darkage_straw_bale.png" },
@@ -74,9 +74,9 @@ minetest.register_node("cottages:straw_bale", {
     is_ground_content = false,
 })
 
-minetest.register_alias("cottages:straw", "farming:straw")
+core.register_alias("cottages:straw", "farming:straw")
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:straw_mat 6",
     recipe = {
         { "default:stone", '',              '' },
@@ -85,7 +85,7 @@ minetest.register_craft({
     replacements = { { "default:stone", "farming:seed_wheat 3" } },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:straw_bale",
     recipe = {
         { "cottages:straw_mat" },
@@ -94,21 +94,21 @@ minetest.register_craft({
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:straw",
     recipe = {
         { "cottages:straw_bale" },
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:straw_bale",
     recipe = {
         { "cottages:straw" },
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:straw_mat 3",
     recipe = {
         { "cottages:straw_bale" },

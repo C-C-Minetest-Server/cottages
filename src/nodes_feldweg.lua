@@ -28,7 +28,7 @@ local register_feldweg_node = function(node_name, def)
 	def.sounds = default.node_sound_dirt_defaults()
 	def.is_ground_content = false
 
-	minetest.register_node(node_name, def)
+	core.register_node(node_name, def)
 end
 function cottages.register_feldweg(suffix, texture_top, texture_bottom, texture_side, name_suffix,
 								   texture_side_with_dent, texture_edges)
@@ -193,7 +193,7 @@ end
 function cottages.register_feldweg_recipe(suffix, base_craftitem)
 	local base_node = "cottages:feldweg" .. suffix
 
-	minetest.register_craft({
+	core.register_craft({
 		output = base_node .. " 4",
 		recipe = {
 			{ "",             "cottages:wagon_wheel", "" },
@@ -202,7 +202,7 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		replacements = { { 'cottages:wagon_wheel', 'cottages:wagon_wheel' }, }
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_crossing" .. suffix .. " 5",
 		recipe = {
 			{ "",        base_node, "" },
@@ -211,7 +211,7 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		},
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_t_junction" .. suffix .. " 5",
 		recipe = {
 			{ "",        base_node, "" },
@@ -221,7 +221,7 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		},
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_curve" .. suffix .. " 5",
 		recipe = {
 			{ base_node, "",        "" },
@@ -230,7 +230,7 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		},
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_end" .. suffix .. " 5",
 		recipe = {
 			{ base_node, "",        base_node },
@@ -238,32 +238,32 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		},
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_45" .. suffix,
 		recipe = { { base_node } }
 	})
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_l_curve" .. suffix,
 		recipe = { { "cottages:feldweg_45" .. suffix } }
 	})
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_r_curve" .. suffix,
 		recipe = { { "cottages:feldweg_l_curve" .. suffix } }
 	})
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_s_45" .. suffix,
 		recipe = { { "cottages:feldweg_r_curve" .. suffix } }
 	})
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_d_45" .. suffix,
 		recipe = { { "cottages:feldweg_s_45" .. suffix } }
 	})
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg" .. suffix,
 		recipe = { { "cottages:feldweg_d_45" .. suffix } }
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_slope" .. suffix .. " 3",
 		recipe = {
 			{ base_node, "",        "" },
@@ -271,7 +271,7 @@ function cottages.register_feldweg_recipe(suffix, base_craftitem)
 		},
 	})
 
-	minetest.register_craft({
+	core.register_craft({
 		output = "cottages:feldweg_slope_long" .. suffix .. " 4",
 		recipe = {
 			{ base_node, "",        "" },
@@ -332,7 +332,7 @@ variants["dry"] = {
 	"default_dirt.png^default_dry_grass_side.png", -- side
 	"cottages_feldweg_surface.png^default_dry_grass.png",
 }
-if minetest.get_modpath("ethereal") then
+if core.get_modpath("ethereal") then
 	variants["bamboo"] = {
 		"ethereal_grass_bamboo_top.png",                   -- grass top
 		"default_dirt.png",                                -- bottom

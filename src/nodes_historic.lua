@@ -20,7 +20,7 @@
 
 local S = cottages.S
 
-minetest.register_node("cottages:wagon_wheel", {
+core.register_node("cottages:wagon_wheel", {
     description = S("Wagon Wheel"),
     drawtype = "signlike",
     tiles = { "cottages_wagonwheel.png" }, -- done by VanessaE!
@@ -40,7 +40,7 @@ minetest.register_node("cottages:wagon_wheel", {
     sounds = default.node_sound_metal_defaults();
 })
 
-minetest.register_node("cottages:loam", {
+core.register_node("cottages:loam", {
     description = S("Loam"),
     tiles = { "cottages_loam.png" },
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, crumbly = 3 },
@@ -52,7 +52,7 @@ cottages.derive_blocks("cottages", "loam")
 
 cottages.derive_blocks("default", "clay")
 
-minetest.register_node("cottages:straw_ground", {
+core.register_node("cottages:straw_ground", {
     description = S("straw ground for animals"),
     tiles = {
         "cottages_darkage_straw.png",
@@ -67,7 +67,7 @@ minetest.register_node("cottages:straw_ground", {
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:glass_pane", {
+core.register_node("cottages:glass_pane", {
     description = S("Simple Glass Pane") .. " " .. S("(centered)"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -92,7 +92,7 @@ minetest.register_node("cottages:glass_pane", {
     is_ground_content = false,
 })
 
-minetest.register_node("cottages:glass_pane_side", {
+core.register_node("cottages:glass_pane_side", {
     description = S("Simple Glass Pane"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -118,7 +118,7 @@ minetest.register_node("cottages:glass_pane_side", {
 })
 
 -- a very small wooden slab
-minetest.register_node("cottages:wood_flat", {
+core.register_node("cottages:wood_flat", {
     description = S("Flat Wooden Planks"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -140,10 +140,10 @@ minetest.register_node("cottages:wood_flat", {
         },
     },
     is_ground_content = false,
-    on_place = minetest.rotate_node,
+    on_place = core.rotate_node,
 })
 
-minetest.register_node("cottages:wool_tent", {
+core.register_node("cottages:wool_tent", {
     description = S("Wool for Tents"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -165,15 +165,15 @@ minetest.register_node("cottages:wool_tent", {
         },
     },
     is_ground_content = false,
-    on_place = minetest.rotate_node,
+    on_place = core.rotate_node,
 })
 
-minetest.register_alias("cottages:wool", "wool:white")
+core.register_alias("cottages:wool", "wool:white")
 
 ---------------------------------------------------------------------------------------
 -- crafting receipes
 ---------------------------------------------------------------------------------------
-minetest.register_craft({
+core.register_craft({
     output = "cottages:wagon_wheel 3",
     recipe = {
         { "default:iron_lump", "group:stick",         "default:iron_lump" },
@@ -182,7 +182,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:loam 4",
     recipe = {
         { "group:sand" },
@@ -190,7 +190,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:straw_ground 2",
     recipe = {
         { "cottages:straw_mat" },
@@ -198,7 +198,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:glass_pane 4",
     recipe = {
         { "group:stick", "group:stick",   "group:stick" },
@@ -207,21 +207,21 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:glass_pane_side",
     recipe = {
         { "cottages:glass_pane" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:glass_pane",
     recipe = {
         { "cottages:glass_pane_side" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:wood_flat 16",
     recipe = {
         { "group:stick", "farming:string", "group:stick" },
@@ -229,7 +229,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:wool_tent 2",
     recipe = {
         { "farming:string", "farming:string" },
@@ -237,7 +237,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:wool",
     recipe = {
         { "cottages:wool_tent", "cottages:wool_tent" }

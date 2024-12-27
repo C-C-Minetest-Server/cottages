@@ -25,8 +25,8 @@ for _, name in ipairs({
     "cottages:chest_work",
     "cottages:chest_storage"
 }) do
-    minetest.register_node(name, {
-        tiles = minetest.registered_nodes["default:chest"].tiles,
+    core.register_node(name, {
+        tiles = core.registered_nodes["default:chest"].tiles,
         paramtype2 = "facedir",
         groups = { not_in_creative_inventory = 1, legacy_cottages_chests = 1 },
         legacy_facedir_simple = true,
@@ -34,13 +34,13 @@ for _, name in ipairs({
     })
 end
 
-minetest.register_lbm({
+core.register_lbm({
     label = "Convert old cottags NPC chests",
     name = "cottages:compact_npc_chest",
     nodenames = { "group:legacy_cottages_chests" },
     run_at_every_load = false,
     action = function(pos, node)
         node.name = "default:chest"
-        minetest.set_node(pos, node)
+        core.set_node(pos, node)
     end,
 })

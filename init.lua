@@ -20,8 +20,8 @@
 
 cottages = {
     fork = "1F616EMO",
-    S = minetest.get_translator("cottages"),
-    MP = minetest.get_modpath("cottages")
+    S = core.get_translator("cottages"),
+    MP = core.get_modpath("cottages")
 }
 
 for _, name in ipairs({

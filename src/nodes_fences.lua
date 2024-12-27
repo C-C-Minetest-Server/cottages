@@ -31,7 +31,7 @@ local small_box = {
         { 0.45,  -0.50, 0.46, 0.50,  0.50,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_small", {
+core.register_node("cottages:fence_small", {
     description = S("Small fence"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -55,7 +55,7 @@ local half_box = {
         { 0.45,  -0.50, 0.46, 0.50,  0.15,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_half_small", {
+core.register_node("cottages:fence_half_small", {
     description = S("Half fence"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -88,7 +88,7 @@ local corner_box = {
         { 0.46,  -0.50, 0.45,  0.50,  0.50,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_corner", {
+core.register_node("cottages:fence_corner", {
     description = S("Small fence (corner)"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -118,7 +118,7 @@ local half_corner_box = {
         { 0.46,  -0.50, 0.45,  0.50,  0.15,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_half_corner", {
+core.register_node("cottages:fence_half_corner", {
     description = S("Half fence (corner)"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -158,7 +158,7 @@ local end_box = {
         { -0.50, -0.50, 0.45,  -0.46, 0.50,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_end", {
+core.register_node("cottages:fence_end", {
     description = S("Small fence (end)"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -194,7 +194,7 @@ local half_end_box = {
         { -0.50, -0.50, 0.45,  -0.46, 0.15,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_half_end", {
+core.register_node("cottages:fence_half_end", {
     description = S("Half fence (end)"),
     drawtype = "nodebox",
     -- top, bottom, side1, side2, inner, outer
@@ -226,7 +226,7 @@ local double_box = {
         { -0.50, -0.50, 0.45,  -0.46, 0.50,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_double", {
+core.register_node("cottages:fence_double", {
     description = S("Small fence (double)"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -255,7 +255,7 @@ local half_double_box = {
         { -0.50, -0.50, 0.45,  -0.46, 0.15,  0.50 },
     },
 }
-minetest.register_node("cottages:fence_half_double", {
+core.register_node("cottages:fence_half_double", {
     description = S("Half fence (double)"),
     drawtype = "nodebox",
     tiles = { "cottages_minimal_wood.png" },
@@ -268,7 +268,7 @@ minetest.register_node("cottages:fence_half_double", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_small 3",
     recipe = {
         { "group:fence", "group:fence" },
@@ -276,8 +276,8 @@ minetest.register_craft({
 })
 
 -- xfences can be configured to replace normal fences - which makes them uncraftable
-if minetest.get_modpath("xfences") ~= nil then
-    minetest.register_craft({
+if core.get_modpath("xfences") ~= nil then
+    core.register_craft({
         output = "cottages:fence_small 3",
         recipe = {
             { "xfences:fence", "xfences:fence" },
@@ -285,42 +285,42 @@ if minetest.get_modpath("xfences") ~= nil then
     })
 end
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_corner",
     recipe = {
         { "cottages:fence_small", "cottages:fence_small" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_small 2",
     recipe = {
         { "cottages:fence_corner" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_end",
     recipe = {
         { "cottages:fence_small", "cottages:fence_small", "cottages:fence_small" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_small 3",
     recipe = {
         { "cottages:fence_end" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_double",
     recipe = {
         { "cottages:fence_small", "", "cottages:fence_small" },
     }
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:fence_small 2",
     recipe = {
         { "cottages:fence_double" },
@@ -328,14 +328,14 @@ minetest.register_craft({
 })
 
 for _, variant in ipairs({ "small", "corner", "end", "double" }) do
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:fence_half_" .. variant .. " 6",
         recipe = {
             { "cottages:fence_" .. variant, "cottages:fence_" .. variant, "cottages:fence_" .. variant },
         }
     })
 
-    minetest.register_craft({
+    core.register_craft({
         type = "shapeless",
         output = "cottages:fence_" .. variant,
         recipe = {

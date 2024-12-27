@@ -19,7 +19,7 @@
 ]]
 
 local S = cottages.S
-local F = minetest.formspec_escape
+local F = core.formspec_escape
 
 local cottages_formspec_threshing_floor =
     "size[8,8]" ..
@@ -80,7 +80,7 @@ local def = {
     _private_translate_key = "Private threshing floor (owned by @1)",
 
     on_construct = function(pos)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local inv = meta:get_inventory()
 
         inv:set_size("harvest", 2)
@@ -95,7 +95,7 @@ local def = {
     after_place_node = function(pos, placer)
         if not placer:is_player() then return end
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local pname = placer:get_player_name()
 
         meta:set_string("owner", pname);
@@ -107,7 +107,7 @@ local def = {
 
     can_dig = function(pos, player)
         if not (player and player:is_player()) then return end
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local owner = meta:get_string("owner")
         local pname = player:get_player_name()
 
@@ -120,7 +120,7 @@ local def = {
     end,
 
     allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, _, count, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
         end
@@ -138,7 +138,7 @@ local def = {
     end,
 
     allow_metadata_inventory_put = function(pos, listname, _, stack, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, player) then
             return 0
         end
@@ -154,7 +154,7 @@ local def = {
     end,
 
     allow_metadata_inventory_take = function(pos, _, _, stack, player)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         return cottages.player_can_use(meta, player) and stack:get_count() or 0
     end,
 
@@ -164,10 +164,10 @@ local def = {
         do -- `wielded` garbage collect
             local wielded = puncher:get_wielded_item()
             if wielded:is_empty() then return end
-            if minetest.get_item_group(wielded:get_name(), "stick") == 0 then return end
+            if core.get_item_group(wielded:get_name(), "stick") == 0 then return end
         end
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if not cottages.player_can_use(meta, puncher) then
             return
         end
@@ -195,9 +195,9 @@ local def = {
 }
 default.set_inventory_action_loggers(def, "threshing floor")
 
-minetest.register_node("cottages:threshing_floor", def)
+core.register_node("cottages:threshing_floor", def)
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:threshing_floor",
     recipe = {
         { "default:junglewood", "default:chest_locked", "default:junglewood", },

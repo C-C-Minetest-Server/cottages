@@ -25,7 +25,7 @@ function cottages.player_can_use(meta, player)
         return false
     end
     local pname = player:get_player_name()
-    local privs = minetest.get_player_privs(pname)
+    local privs = core.get_player_privs(pname)
 
     if privs.protection_bypass or privs.server then
         return true
@@ -50,13 +50,13 @@ function cottages.check_inventory_empty(inv, lists)
 end
 
 function cottages.toggle_public(pos, player)
-    local node = minetest.get_node_or_nil(pos)
+    local node = core.get_node_or_nil(pos)
     if not node then return false end
 
-    local def = minetest.registered_nodes[node.name]
+    local def = core.registered_nodes[node.name]
     if not def then return false end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local curr_status = meta:get_string("public")
 
     if curr_status == "public" then
@@ -86,13 +86,13 @@ function cottages.toggle_public(pos, player)
 end
 
 function cottages.get_public_infotext(pos)
-    local node = minetest.get_node_or_nil(pos)
+    local node = core.get_node_or_nil(pos)
     if not node then return "" end
 
-    local def = minetest.registered_nodes[node.name]
+    local def = core.registered_nodes[node.name]
     if not def then return "" end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local owner = meta:get_string("owner")
     local curr_status = meta:get_string("public")
 
@@ -110,7 +110,7 @@ end
 
 function cottages.on_public_receive_fields(pos, _, fields, sender)
     if fields.public then
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local pname = sender:get_player_name()
         local owner = meta:get_string("owner")
 
@@ -121,12 +121,12 @@ function cottages.on_public_receive_fields(pos, _, fields, sender)
 end
 
 function cottages.drop_inventory(pos, lists)
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     for _, list in ipairs(lists) do
         local items = inv:get_list(list)
         for _, stack in ipairs(items) do
-            minetest.add_item(pos, stack)
+            core.add_item(pos, stack)
         end
     end
 end
@@ -134,17 +134,17 @@ end
 function cottages.derive_blocks(modname, nodename, def)
     local name = modname .. ":" .. nodename
     if not def then
-        def = assert(minetest.registered_nodes[name])
+        def = assert(core.registered_nodes[name])
     end
 
-    if minetest.global_exists("stairsplus") then
+    if core.global_exists("stairsplus") then
         stairsplus:register_all(modname, nodename, name, {
             description = def.description,
             tiles = def.tiles,
             groups = def.groups,
             sounds = def.sounds,
         })
-    elseif minetest.global_exists("stairs") then
+    elseif core.global_exists("stairs") then
         if stairs.mod == "redo" then
             stairs.register_all(nodename, name,
             def.groups,

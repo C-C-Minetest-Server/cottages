@@ -21,7 +21,7 @@
 local S = cottages.S
 
 cottages.register_roof = function(name, display_name, tiles, basic_material, homedecor_alternative, sounds)
-    minetest.register_node("cottages:roof_" .. name, {
+    core.register_node("cottages:roof_" .. name, {
         description = S("@1 Roof", display_name),
         drawtype = "nodebox",
         tiles = tiles,
@@ -47,8 +47,8 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
     })
 
     -- a better roof than the normal stairs; this one is for usage directly on top of walls (it has the form of a stair)
-    if name ~= "straw" or not minetest.registered_nodes["stairs:stair_straw"] then
-        minetest.register_node("cottages:roof_connector_" .. name, {
+    if name ~= "straw" or not core.registered_nodes["stairs:stair_straw"] then
+        core.register_node("cottages:roof_connector_" .. name, {
             description = S("@1 Roof connector", display_name),
             drawtype = "nodebox",
             -- top, bottom, side1, side2, inner, outer
@@ -73,12 +73,12 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
             is_ground_content = false,
         })
     else
-        minetest.register_alias("cottages:roof_connector_straw", "stairs:stair_straw")
+        core.register_alias("cottages:roof_connector_straw", "stairs:stair_straw")
     end
 
     -- this one is the slab version of the above roof
-    if name ~= "straw" or not minetest.registered_nodes["stairs:slab_straw"] then
-        minetest.register_node("cottages:roof_flat_" .. name, {
+    if name ~= "straw" or not core.registered_nodes["stairs:slab_straw"] then
+        core.register_node("cottages:roof_flat_" .. name, {
             description = S("@1 Roof (flat) ", display_name),
             drawtype = "nodebox",
             -- top, bottom, side1, side2, inner, outer
@@ -102,10 +102,10 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
             is_ground_content = false,
         })
     else
-        minetest.register_alias("cottages:roof_flat_straw", "stairs:slab_straw")
+        core.register_alias("cottages:roof_flat_straw", "stairs:slab_straw")
     end
 
-    minetest.register_node("cottages:roof_" .. name .. "_corner_inner", {
+    core.register_node("cottages:roof_" .. name .. "_corner_inner", {
         description = S("@1 Roof (inner corner) ", display_name),
         drawtype = "nodebox",
         tiles = { tiles[1],
@@ -136,7 +136,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         is_ground_content = false,
     })
 
-    minetest.register_node("cottages:roof_" .. name .. "_corner_outer", {
+    core.register_node("cottages:roof_" .. name .. "_corner_outer", {
         description = S("@1 Roof (outer corner) ", display_name),
         drawtype = "nodebox",
         tiles = { tiles[1],
@@ -167,8 +167,8 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         is_ground_content = false,
     })
 
-    if not homedecor_alternative or minetest.get_modpath("homedecor") then
-        minetest.register_craft({
+    if not homedecor_alternative or core.get_modpath("homedecor") then
+        core.register_craft({
             output = "cottages:roof_" .. name .. " 6",
             recipe = {
                 { '',             '',             basic_material },
@@ -179,7 +179,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
     elseif homedecor_alternative then
         basic_material = 'cottages:roof_wood'
 
-        minetest.register_craft({
+        core.register_craft({
             output = "cottages:roof_" .. name .. " 3",
             recipe = {
                 { homedecor_alternative, '',             basic_material },
@@ -189,7 +189,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         })
     end
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:roof_connector_" .. name,
         recipe = {
             { 'cottages:roof_' .. name },
@@ -197,14 +197,14 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         }
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:roof_flat_" .. name .. ' 2',
         recipe = {
             { 'cottages:roof_' .. name, 'cottages:roof_' .. name },
         }
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:roof_" .. name .. "_corner_inner 3",
         recipe = {
             { 'cottages:roof_' .. name, 'cottages:roof_' .. name },
@@ -212,7 +212,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         }
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:roof_" .. name .. " 3",
         recipe = {
             { "cottages:roof_" .. name .. "_corner_inner",
@@ -221,7 +221,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         }
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:roof_" .. name .. "_corner_outer 3",
         recipe = {
             { '',                       'cottages:roof_' .. name },
@@ -229,7 +229,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
         }
     })
 
-    minetest.register_craft({
+    core.register_craft({
         output = "cottages:roof_" .. name .. " 3",
         recipe = {
             { "cottages:roof_" .. name .. "_corner_outer",
@@ -239,7 +239,7 @@ cottages.register_roof = function(name, display_name, tiles, basic_material, hom
     })
 
     -- convert flat roofs back to normal roofs
-    minetest.register_craft({
+    core.register_craft({
         type = "shapeless",
         output = "cottages:roof_" .. name,
         recipe = {
@@ -290,7 +290,7 @@ cottages.register_roof('slate', S("Slate"),
 ---------------------------------------------------------------------------------------
 
 function cottages.register_vertical_roof(name, description, texture, craftitem)
-    minetest.register_node("cottages:" .. name, {
+    core.register_node("cottages:" .. name, {
         description = description,
         tiles = {
             texture, cottages.texture_roof_sides,
@@ -304,7 +304,7 @@ function cottages.register_vertical_roof(name, description, texture, craftitem)
     })
 
     if craftitem ~= false then
-        minetest.register_craft({
+        core.register_craft({
             output = "cottages:" .. name,
             recipe = {
                 { "default:stone", "group:wood", craftitem }
@@ -333,12 +333,12 @@ cottages.register_vertical_roof("roof_vertical_brown", S("Vertical brown shingle
 cottages.register_vertical_roof("roof_vertical_shingle", S("Vertical shingle roof"),
     "cottages_homedecor_shingles_misc_wood.png", false)
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:roof_vertical_shingle 2",
     recipe = { { "group:wood", "cottages:wood_flat" } }
 })
 
-minetest.register_node("cottages:roof_vertical_wood", {
+core.register_node("cottages:roof_vertical_wood", {
     description = S("Vertical wooden roof"),
     tiles = {
         "default_tree.png", cottages.texture_roof_sides,
@@ -354,7 +354,7 @@ minetest.register_node("cottages:roof_vertical_wood", {
 ---------------------------------------------------------------------------------------
 -- Reed might also be needed as a full block
 ---------------------------------------------------------------------------------------
-minetest.register_node("cottages:reet", {
+core.register_node("cottages:reet", {
     description = S("Reed for thatching"),
     tiles = { "cottages_reet.png" },
     groups = { hay = 3, snappy = 3, choppy = 3, oddly_breakable_by_hand = 3, flammable = 3 },
@@ -363,7 +363,7 @@ minetest.register_node("cottages:reet", {
 })
 
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:reet",
     recipe = {
         { "default:papyrus", "default:papyrus" },

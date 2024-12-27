@@ -1,12 +1,10 @@
 # textdomain: cottages
-### nodes_anvil.lua ###
 
-##[ _translations.lua ]##
-##[ src/nodes_anvil.lua ]##
-### nodes_anvil.lua ###
-### _translations.lua ###
-Inventory is not empty!=
-You are not the owner!=
+##[ src/functions.lua ]##
+@1 Stairs=
+@1 Slab=
+@1 Stairs (Inner)=
+@1 Slab (Outer)=
 
 ##[ src/nodes_anvil.lua ]##
 Steel hammer=
@@ -17,10 +15,11 @@ Anvil=
 Punch anvil with hammer to@nrepair tool in workpiece-slot.=
 Anvil (owned by @1)=
 Can't dig node: @1=
+You are not the owner!=
+Inventory is not empty!=
 The workpiece slot is for damaged tools only.=
 
 ##[ src/nodes_barrel.lua ]##
-### nodes_barrel.lua ###
 Pour:=
 Fill:=
 Barrel (Closed)=
@@ -30,7 +29,6 @@ Barrel (Opened), lying=
 Tub=
 
 ##[ src/nodes_doorlike.lua ]##
-### nodes_doorlike.lua ###
 Window shutters=
 Half Door=
 Half Door (Inverted)=
@@ -39,7 +37,6 @@ Wooden Hatch=
 Metal Hatch=
 
 ##[ src/nodes_feldweg.lua ]##
-### nodes_feldweg.lua ###
 Dirt road @1=
 Dirt road crossing @1=
 Dirt road T-junction @1=
@@ -60,14 +57,16 @@ on dry dirt=
 on bamboo dirt=
 
 ##[ src/nodes_fences.lua ]##
-### nodes_fences.lua ###
 Small fence=
+Half fence=
 Small fence (corner)=
+Half fence (corner)=
 Small fence (end)=
+Half fence (end)=
 Small fence (double)=
+Half fence (double)=
 
 ##[ src/nodes_furniture.lua ]##
-### nodes_furniture.lua ###
 Bed=
 Sleeping mat=
 sleeping mat with pillow=
@@ -82,19 +81,13 @@ Sorry. This washing place is out of water. Please place it above water!=
 You feel much cleaner after some washing.=
 
 ##[ src/nodes_hay.lua ]##
-### nodes_hay.lua ###
 Hay mat=
 Hay=
 Hay bale=
 
 ##[ src/nodes_historic.lua ]##
-### nodes_historic.lua ###
 Wagon Wheel=
 Loam=
-Loam Stairs=
-Loam Slab=
-Clay Stairs=
-Clay Slab=
 straw ground for animals=
 Simple Glass Pane=
 (centered)=
@@ -102,7 +95,6 @@ Flat Wooden Planks=
 Wool for Tents=
 
 ##[ src/nodes_mill.lua ]##
-### nodes_mill.lua ###
 Wheat seeds:=
 Flour:=
 Mill=
@@ -115,28 +107,24 @@ Processed @1 seeds=
 ##[ src/nodes_mill.lua ]##
 ##[ src/nodes_threshing_floor.lua ]##
 ##[ src/nodes_water.lua ]##
-### nodes_mill.lua ###
-### nodes_threshing_floor.lua ###
-### nodes_water.lua ###
 Public?=
 
 ##[ src/nodes_mining.lua ]##
-### nodes_mining.lua ###
 Rope for climbing=
 The entire rope would be too heavy. Start digging at its lowest end!=
 Ladder with rail support=
 
 ##[ src/nodes_pitchfork.lua ]##
-### nodes_pitchfork.lua ###
 Pitchfork=
 Dig dirt with grass to get hay, place with right-click=
 pitchfork (for hay and straw)=
 
 ##[ src/nodes_roof.lua ]##
-### nodes_roof.lua ###
 @1 Roof=
 @1 Roof connector=
 @1 Roof (flat) =
+@1 Roof (inner corner) =
+@1 Roof (outer corner) =
 Straw=
 Reet=
 Wooden=
@@ -145,15 +133,18 @@ Terracotta=
 Brown shingle=
 Slate=
 Vertical Slate=
+Vertical asphalt roof=
+Vertical terracotta roof=
+Vertical wooden roof=
+Vertical brown shingle roof=
+Vertical shingle roof=
 Reed for thatching=
 
 ##[ src/nodes_straw.lua ]##
-### nodes_straw.lua ###
 Layer of straw=
 Straw Bale=
 
 ##[ src/nodes_threshing_floor.lua ]##
-### nodes_threshing_floor.lua ###
 Harvested wheat:=
 Straw:=
 Seeds:=
@@ -165,7 +156,6 @@ Private threshing floor (owned by @1)=
 Processed @1 wheats=
 
 ##[ src/nodes_water.lua ]##
-### nodes_water.lua ###
 Punch the well while wielding an empty bucket.=
 Your bucket will slowly be filled with river water.=
 Punch again to get the bucket back when it is full.=

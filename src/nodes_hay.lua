@@ -20,7 +20,7 @@
 
 local S = cottages.S
 
-minetest.override_item("default:dirt_with_grass", {
+core.override_item("default:dirt_with_grass", {
     after_dig_node = function(pos, _, _, digger)
         if not digger or not digger:is_player() then
             return
@@ -32,19 +32,19 @@ minetest.override_item("default:dirt_with_grass", {
 
         local pos_above = { x = pos.x, y = pos.y + 1, z = pos.z }
         local pname = digger:get_player_name()
-        if minetest.is_protected(pos_above, pname) then
+        if core.is_protected(pos_above, pname) then
             -- This is not a violation, but an action impossible to be carried out
             return
         end
 
-        local node_above = minetest.get_node_or_nil(pos_above)
+        local node_above = core.get_node_or_nil(pos_above)
         if not node_above or node_above.name ~= "air" then
             return nil
         end
-        minetest.swap_node(pos, { name = "default:dirt" })
-        minetest.add_node(pos_above, { name = "cottages:hay_mat", param2 = math.random(2, 25) })
+        core.swap_node(pos, { name = "default:dirt" })
+        core.add_node(pos_above, { name = "cottages:hay_mat", param2 = math.random(2, 25) })
         -- start a node timer so that the hay will decay after some time
-        local timer = minetest.get_node_timer(pos_above)
+        local timer = core.get_node_timer(pos_above)
         if not timer:is_started() then
             timer:start(math.random(60, 300))
         end
@@ -53,7 +53,7 @@ minetest.override_item("default:dirt_with_grass", {
     end,
 })
 
-minetest.register_node("cottages:hay_mat", {
+core.register_node("cottages:hay_mat", {
     drawtype = "nodebox",
     paramtype = "light",
     paramtype2 = "leveled",
@@ -72,18 +72,18 @@ minetest.register_node("cottages:hay_mat", {
     },
     -- make sure a placed hay block looks halfway reasonable
     after_place_node = function(pos)
-        minetest.swap_node(pos, { name = "cottages:hay_mat", param2 = math.random(2, 25) })
+        core.swap_node(pos, { name = "cottages:hay_mat", param2 = math.random(2, 25) })
     end,
     on_timer = function(pos)
-        local node = minetest.get_node(pos)
+        local node = core.get_node(pos)
         if node and node.name == "cottages:hay_mat" then
-            minetest.remove_node(pos)
-            minetest.check_for_falling(pos)
+            core.remove_node(pos)
+            core.check_for_falling(pos)
         end
     end,
 })
 
-minetest.register_node("cottages:hay", {
+core.register_node("cottages:hay", {
     description = S("Hay"),
     tiles = { "cottages_darkage_straw.png^[multiply:#88BB88" },
     groups = { hay = 3, snappy = 2, oddly_breakable_by_hand = 2, flammable = 3 },
@@ -97,7 +97,7 @@ local bale_box = {
         { -0.45, -0.5, -0.45, 0.45, 0.45, 0.45 },
     }
 }
-minetest.register_node("cottages:hay_bale", {
+core.register_node("cottages:hay_bale", {
     drawtype = "nodebox",
     description = S("Hay bale"),
     tiles = { "cottages_darkage_straw_bale.png^[multiply:#88BB88" },
@@ -113,14 +113,14 @@ minetest.register_node("cottages:hay_bale", {
 --
 -- craft recipes
 --
-minetest.register_craft({
+core.register_craft({
     output = "cottages:hay_mat 9",
     recipe = {
         { "cottages:hay" },
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:hay",
     recipe = {
         { "cottages:hay_mat", "cottages:hay_mat", "cottages:hay_mat" },
@@ -129,12 +129,12 @@ minetest.register_craft({
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:hay",
     recipe = { { "cottages:hay_bale" } },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:hay_bale",
     recipe = { { "cottages:hay" } },
 })

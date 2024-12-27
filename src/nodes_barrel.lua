@@ -21,7 +21,7 @@
 local S = cottages.S
 
 local function on_construct(pos)
-    local meta = minetest.get_meta(pos);
+    local meta = core.get_meta(pos);
     local percent = math.random(1, 100); -- TODO: show real filling
 
     meta:set_string('formspec',
@@ -44,7 +44,7 @@ local function on_construct(pos)
 end
 
 local function can_dig(pos)
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv  = meta:get_inventory()
 
     return cottages.check_inventory_empty(inv, { "input", "output" })
@@ -57,8 +57,8 @@ local function allow_metadata_inventory_put(pos, _, _, _, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
-    if minetest.is_protected(pos, pname) then
-        minetest.record_protection_violation(pos, pname)
+    if core.is_protected(pos, pname) then
+        core.record_protection_violation(pos, pname)
         return 0
     end
 
@@ -69,8 +69,8 @@ local function allow_metadata_inventory_move(pos, _, _, _, _, count, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
-    if minetest.is_protected(pos, pname) then
-        minetest.record_protection_violation(pos, pname)
+    if core.is_protected(pos, pname) then
+        core.record_protection_violation(pos, pname)
         return 0
     end
 
@@ -81,8 +81,8 @@ local function allow_metadata_inventory_take(pos, _, _, _, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
-    if minetest.is_protected(pos, pname) then
-        minetest.record_protection_violation(pos, pname)
+    if core.is_protected(pos, pname) then
+        core.record_protection_violation(pos, pname)
         return 0
     end
 
@@ -93,7 +93,7 @@ local function on_punch_swap(name)
     return function(pos, node)
         node.name = name
         node.param2 = 0
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
     end
 end
 
@@ -105,7 +105,7 @@ local function within3_param2_swap(name)
             node.param2 = 0
             node.name = name
         end
-        minetest.swap_node(pos, node)
+        core.swap_node(pos, node)
     end
 end
 
@@ -114,7 +114,7 @@ local function apply_logger(def)
     return def
 end
 
-minetest.register_node("cottages:barrel", apply_logger({
+core.register_node("cottages:barrel", apply_logger({
     description = S("Barrel (Closed)"),
     paramtype = "light",
     drawtype = "mesh",
@@ -134,7 +134,7 @@ minetest.register_node("cottages:barrel", apply_logger({
     allow_metadata_inventory_take = allow_metadata_inventory_take,
 }))
 
-minetest.register_node("cottages:barrel_open", apply_logger({
+core.register_node("cottages:barrel_open", apply_logger({
     description = S("Barrel (Opened)"),
     paramtype = "light",
     drawtype = "mesh",
@@ -155,7 +155,7 @@ minetest.register_node("cottages:barrel_open", apply_logger({
     allow_metadata_inventory_take = allow_metadata_inventory_take,
 }))
 
-minetest.register_node("cottages:barrel_lying", apply_logger({
+core.register_node("cottages:barrel_lying", apply_logger({
     description = S("Barrel (Closed), lying"),
     paramtype = "light",
     paramtype2 = "facedir",
@@ -177,7 +177,7 @@ minetest.register_node("cottages:barrel_lying", apply_logger({
     allow_metadata_inventory_take = allow_metadata_inventory_take,
 }))
 
-minetest.register_node("cottages:barrel_lying_open", apply_logger({
+core.register_node("cottages:barrel_lying_open", apply_logger({
     description = S("Barrel (Opened), lying"),
     paramtype = "light",
     paramtype2 = "facedir",
@@ -207,7 +207,7 @@ local tub_node_box = {
     }
 }
 
-minetest.register_node("cottages:tub", {
+core.register_node("cottages:tub", {
     description = S("Tub"),
     paramtype = "light",
     drawtype = "mesh",
@@ -220,7 +220,7 @@ minetest.register_node("cottages:tub", {
     sounds = default.node_sound_wood_defaults(),
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:barrel",
     recipe = {
         { "group:wood",          "",           "group:wood" },
@@ -229,14 +229,14 @@ minetest.register_craft({
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:tub 2",
     recipe = {
         { "cottages:barrel" },
     },
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:barrel",
     recipe = {
         { "cottages:tub" },

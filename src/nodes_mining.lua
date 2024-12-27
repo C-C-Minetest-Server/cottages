@@ -26,8 +26,8 @@ local S = cottages.S
 -- the rope can only be digged if there is no further rope above it; (configuratble)
 -- Note: This rope also counts as a rail node; thus, carts can move through it
 
-local rope_dig_without_support = minetest.settings:get_bool("cottages.rope_dig_without_support", false)
-minetest.register_node("cottages:rope", {
+local rope_dig_without_support = core.settings:get_bool("cottages.rope_dig_without_support", false)
+core.register_node("cottages:rope", {
     description = S("Rope for climbing"),
     tiles = { "cottages_rope.png" },
     groups = { snappy = 3, choppy = 3, oddly_breakable_by_hand = 3, rail = 1, connect_to_raillike = 1 },
@@ -42,10 +42,10 @@ minetest.register_node("cottages:rope", {
         fixed = { -0.2, -0.5, -0.2, 0.2, 0.5, 0.2 }
     },
     can_dig = rope_dig_without_support and function(pos, player)
-        local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
+        local below = core.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
         if below.name == "cottages:rope" then
             if player and player:is_player() then
-                minetest.chat_send_player(player:get_player_name(),
+                core.chat_send_player(player:get_player_name(),
                     S('The entire rope would be too heavy. Start digging at its lowest end!'))
             end
             return false
@@ -55,7 +55,7 @@ minetest.register_node("cottages:rope", {
     sounds = default.node_sound_leaves_defaults(),
 })
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:rope",
     recipe = {
         { "farming:cotton" },
@@ -65,7 +65,7 @@ minetest.register_craft({
 })
 
 -- Note: This rope also counts as a rail node; thus, carts can move through it
-minetest.register_node("cottages:ladder_with_rope_and_rail", {
+core.register_node("cottages:ladder_with_rope_and_rail", {
     description = S("Ladder with rail support"),
     drawtype = "signlike",
     tiles = { "default_ladder_wood.png^carts_rail_straight.png^cottages_rope.png" },
@@ -87,7 +87,7 @@ minetest.register_node("cottages:ladder_with_rope_and_rail", {
 
 
 
-minetest.register_craft({
+core.register_craft({
     output = "cottages:ladder_with_rope_and_rail 3",
     recipe = {
         { "default:ladder", "cottages:rope", "default:rail" }
