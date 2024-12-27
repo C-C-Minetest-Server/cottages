@@ -45,6 +45,30 @@ minetest.register_node("cottages:fence_small", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
+local half_box = {
+    type = "fixed",
+    fixed = {
+        { -0.45, -0.35, 0.46, 0.45,  -0.20, 0.50 },
+        { -0.45, 0.00,  0.46, 0.45,  0.15,  0.50 },
+
+        { -0.50, -0.50, 0.46, -0.45, 0.15,  0.50 },
+        { 0.45,  -0.50, 0.46, 0.50,  0.15,  0.50 },
+    },
+}
+minetest.register_node("cottages:fence_half_small", {
+    description = S("Half fence"),
+    drawtype = "nodebox",
+    -- top, bottom, side1, side2, inner, outer
+    tiles = { "cottages_minimal_wood.png" },
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    node_box = half_box,
+    selection_box = half_box,
+    is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
+})
+
 
 local corner_box = {
     type = "fixed",
@@ -74,6 +98,36 @@ minetest.register_node("cottages:fence_corner", {
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
     node_box = corner_box,
     selection_box = corner_box,
+    is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+local half_corner_box = {
+    type = "fixed",
+    fixed = {
+        { -0.45, -0.35, 0.46,  0.45,  -0.20, 0.50 },
+        { -0.45, 0.00,  0.46,  0.45,  0.15,  0.50 },
+
+        { -0.50, -0.50, 0.46,  -0.45, 0.15,  0.50 },
+        { 0.45,  -0.50, 0.46,  0.50,  0.15,  0.50 },
+
+        { 0.46,  -0.35, -0.45, 0.50,  -0.20, 0.45 },
+        { 0.46,  0.00,  -0.45, 0.50,  0.15,  0.45 },
+
+        { 0.46,  -0.50, -0.50, 0.50,  0.15,  -0.45 },
+        { 0.46,  -0.50, 0.45,  0.50,  0.15,  0.50 },
+    },
+}
+minetest.register_node("cottages:fence_half_corner", {
+    description = S("Half fence (corner)"),
+    drawtype = "nodebox",
+    -- top, bottom, side1, side2, inner, outer
+    tiles = { "cottages_minimal_wood.png" },
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    node_box = half_corner_box,
+    selection_box = half_corner_box,
     is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -118,6 +172,42 @@ minetest.register_node("cottages:fence_end", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
+local half_end_box = {
+    type = "fixed",
+    fixed = {
+        { -0.45, -0.35, 0.46,  0.45,  -0.20, 0.50 },
+        { -0.45, 0.00,  0.46,  0.45,  0.15,  0.50 },
+
+        { -0.50, -0.50, 0.46,  -0.45, 0.15,  0.50 },
+        { 0.45,  -0.50, 0.46,  0.50,  0.15,  0.50 },
+
+        { 0.46,  -0.35, -0.45, 0.50,  -0.20, 0.45 },
+        { 0.46,  0.00,  -0.45, 0.50,  0.15,  0.45 },
+
+        { 0.46,  -0.50, -0.50, 0.50,  0.15,  -0.45 },
+        { 0.46,  -0.50, 0.45,  0.50,  0.150,  0.50 },
+
+        { -0.50, -0.35, -0.45, -0.46, -0.20, 0.45 },
+        { -0.50, 0.00,  -0.45, -0.46, 0.15,  0.45 },
+
+        { -0.50, -0.50, -0.50, -0.46, 0.15,  -0.45 },
+        { -0.50, -0.50, 0.45,  -0.46, 0.15,  0.50 },
+    },
+}
+minetest.register_node("cottages:fence_half_end", {
+    description = S("Half fence (end)"),
+    drawtype = "nodebox",
+    -- top, bottom, side1, side2, inner, outer
+    tiles = { "cottages_minimal_wood.png" },
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    node_box = half_end_box,
+    selection_box = half_end_box,
+    is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
+})
+
 local double_box = {
     type = "fixed",
     fixed = {
@@ -145,6 +235,35 @@ minetest.register_node("cottages:fence_double", {
     groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
     node_box = double_box,
     selection_box = double_box,
+    is_ground_content = false,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+local half_double_box = {
+    type = "fixed",
+    fixed = {
+        { 0.46,  -0.35, -0.45, 0.50,  -0.20, 0.45 },
+        { 0.46,  0.00,  -0.45, 0.50,  0.15,  0.45 },
+
+        { 0.46,  -0.50, -0.50, 0.50,  0.15,  -0.45 },
+        { 0.46,  -0.50, 0.45,  0.50,  0.15,  0.50 },
+
+        { -0.50, -0.35, -0.45, -0.46, -0.20, 0.45 },
+        { -0.50, 0.00,  -0.45, -0.46, 0.15,  0.45 },
+
+        { -0.50, -0.50, -0.50, -0.46, 0.15,  -0.45 },
+        { -0.50, -0.50, 0.45,  -0.46, 0.15,  0.50 },
+    },
+}
+minetest.register_node("cottages:fence_half_double", {
+    description = S("Half fence (double)"),
+    drawtype = "nodebox",
+    tiles = { "cottages_minimal_wood.png" },
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = { snappy = 2, choppy = 2, oddly_breakable_by_hand = 2 },
+    node_box = half_double_box,
+    selection_box = half_double_box,
     is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -207,3 +326,21 @@ minetest.register_craft({
         { "cottages:fence_double" },
     }
 })
+
+for _, variant in ipairs({ "small", "corner", "end", "double" }) do
+    minetest.register_craft({
+        output = "cottages:fence_half_" .. variant .. " 6",
+        recipe = {
+            { "cottages:fence_" .. variant, "cottages:fence_" .. variant, "cottages:fence_" .. variant },
+        }
+    })
+
+    minetest.register_craft({
+        type = "shapeless",
+        output = "cottages:fence_" .. variant,
+        recipe = {
+            "cottages:fence_half_" .. variant,
+            "cottages:fence_half_" .. variant,
+        }
+    })
+end
