@@ -53,7 +53,7 @@ end
 -- Liquid handling not yet done even on upstream.
 -- but at least, lets add protection checking.
 
-local function allow_metadata_inventory_put(pos, _, _, _, player)
+local function allow_metadata_inventory_put(pos, _, _, stack, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
@@ -62,7 +62,7 @@ local function allow_metadata_inventory_put(pos, _, _, _, player)
         return 0
     end
 
-    return -1
+    return stack:get_count()
 end
 
 local function allow_metadata_inventory_move(pos, _, _, _, _, count, player)
@@ -77,7 +77,7 @@ local function allow_metadata_inventory_move(pos, _, _, _, _, count, player)
     return count
 end
 
-local function allow_metadata_inventory_take(pos, _, _, _, player)
+local function allow_metadata_inventory_take(pos, _, _, stack, player)
     if not player:is_player() then return end
     local pname = player:get_player_name()
 
@@ -86,7 +86,7 @@ local function allow_metadata_inventory_take(pos, _, _, _, player)
         return 0
     end
 
-    return -1
+    return stack:get_count()
 end
 
 local function on_punch_swap(name)
