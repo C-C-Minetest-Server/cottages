@@ -42,7 +42,7 @@ core.register_node("cottages:fence_small", {
     node_box = small_box,
     selection_box = small_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 local half_box = {
@@ -66,7 +66,7 @@ core.register_node("cottages:fence_half_small", {
     node_box = half_box,
     selection_box = half_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 
@@ -99,7 +99,7 @@ core.register_node("cottages:fence_corner", {
     node_box = corner_box,
     selection_box = corner_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 local half_corner_box = {
@@ -129,7 +129,7 @@ core.register_node("cottages:fence_half_corner", {
     node_box = half_corner_box,
     selection_box = half_corner_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 
@@ -169,7 +169,7 @@ core.register_node("cottages:fence_end", {
     node_box = end_box,
     selection_box = end_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 local half_end_box = {
@@ -185,7 +185,7 @@ local half_end_box = {
         { 0.46,  0.00,  -0.45, 0.50,  0.15,  0.45 },
 
         { 0.46,  -0.50, -0.50, 0.50,  0.15,  -0.45 },
-        { 0.46,  -0.50, 0.45,  0.50,  0.150,  0.50 },
+        { 0.46,  -0.50, 0.45,  0.50,  0.150, 0.50 },
 
         { -0.50, -0.35, -0.45, -0.46, -0.20, 0.45 },
         { -0.50, 0.00,  -0.45, -0.46, 0.15,  0.45 },
@@ -205,7 +205,7 @@ core.register_node("cottages:fence_half_end", {
     node_box = half_end_box,
     selection_box = half_end_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 local double_box = {
@@ -236,7 +236,7 @@ core.register_node("cottages:fence_double", {
     node_box = double_box,
     selection_box = double_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 local half_double_box = {
@@ -265,7 +265,7 @@ core.register_node("cottages:fence_half_double", {
     node_box = half_double_box,
     selection_box = half_double_box,
     is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+    sounds = default.node_sound_wood_defaults(),
 })
 
 core.register_craft({
@@ -302,7 +302,8 @@ core.register_craft({
 core.register_craft({
     output = "cottages:fence_end",
     recipe = {
-        { "cottages:fence_small", "cottages:fence_small", "cottages:fence_small" },
+        { "",                     "cottages:fence_small", "" },
+        { "cottages:fence_small", "",                     "cottages:fence_small" },
     }
 })
 
