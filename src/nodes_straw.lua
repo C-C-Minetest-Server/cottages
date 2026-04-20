@@ -95,13 +95,6 @@ core.register_craft({
 })
 
 core.register_craft({
-    output = "cottages:straw",
-    recipe = {
-        { "cottages:straw_bale" },
-    },
-})
-
-core.register_craft({
     output = "cottages:straw_bale",
     recipe = {
         { "cottages:straw" },
